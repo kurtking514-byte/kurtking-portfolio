@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- KK ransom-note monogram, like the logo in the top bar -->
+  <g transform="rotate(-7 18 30)">
+    <rect x="3" y="12" width="28" height="34" fill="#E60023"/>
+    <rect x="1" y="10" width="28" height="34" fill="#F5F3EE"/>
+    <text x="15" y="38" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="28" fill="#101010">K</text>
+  </g>
+  <g transform="rotate(6 46 38)">
+    <polygon points="32,18 62,16 60,58 34,56" fill="#E60023"/>
+    <text x="47" y="49" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-weight="700" font-size="30" fill="#101010">K</text>
+  </g>
+</svg>

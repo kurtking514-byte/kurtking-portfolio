@@ -8,7 +8,7 @@ A one-screen-per-section site with a bold red, black and cream design inspired b
 
 | Tab | What's there |
 | --- | --- |
-| **Home** | Name, tagline, course, portrait |
+| **Home** | Name, "I am a ___" word box, course, portrait |
 | **Education** | School ladder: College, Senior High, Junior High, Elementary, with photos and achievements |
 | **Experience** | Phone shop repair tech and barangay office assistant (SPES), with photo documentation |
 | **Projects** | Norman Cellphone Center, ROBERT0 and POSEIDON, plus B.A.L.O.N.G and Prompt Refiner, with photos and videos |
@@ -17,7 +17,8 @@ A one-screen-per-section site with a bold red, black and cream design inspired b
 
 ## Features
 
-- Dark and light themes with an angular wipe transition
+- Dark and light themes with an angular wipe transition, and a portrait for each
+- Persona-style motion: portrait impact, KK logo shuffle, speech-bubble captions
 - Tabs, Prev/Next arrows and the ← / → keys to move between sections
 - Photo and video viewer for project and work documentation
 - Each section fits a single desktop screen; no scrolling
@@ -38,6 +39,7 @@ Then open <http://localhost:5173>.
 ```
 index.html            Page markup for all six sections
 assets/
+  favicon.svg         Tab icon (KK monogram)
   css/style.css       Styles and themes
   js/main.js          Section switching, theme switch, ladders, photo viewer
   images/             Web-sized photos, logos and video posters

@@ -170,12 +170,12 @@ const galleries = {
   norman: {
     title: 'Norman Cellphone Center',
     photos: [
-      { src: 'assets/images/proj-norman-n1.jpg', caption: 'Staff dashboard: what needs attention today' },
-      { src: 'assets/images/proj-norman-n2.jpg', caption: 'Live chat: watching the AI chatbot and taking over when needed' },
-      { src: 'assets/images/proj-norman-n5.jpg', caption: 'Staff sign-in' },
-      { src: 'assets/images/proj-norman-n3.jpg', caption: 'Repairs: tracking each job from check-in to pickup' },
-      { src: 'assets/images/proj-norman-n4.jpg', caption: 'Inventory: 134 products with prices and stock' },
-      { src: 'assets/images/proj-norman-3.jpg', caption: "The shop's Facebook page, where the Messenger bot runs" },
+      { src: 'assets/images/proj-norman-1.jpg', caption: 'Staff dashboard: what needs attention today' },
+      { src: 'assets/images/proj-norman-2.jpg', caption: 'Live chat: watching the AI chatbot and taking over when needed' },
+      { src: 'assets/images/proj-norman-5.jpg', caption: 'Staff sign-in' },
+      { src: 'assets/images/proj-norman-3.jpg', caption: 'Repairs: tracking each job from check-in to pickup' },
+      { src: 'assets/images/proj-norman-4.jpg', caption: 'Inventory: 134 products with prices and stock' },
+      { src: 'assets/images/proj-norman-6.jpg', caption: "The shop's Facebook page, where the Messenger bot runs" },
     ],
   },
   robert0: {
