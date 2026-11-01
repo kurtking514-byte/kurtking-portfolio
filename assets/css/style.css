@@ -43,13 +43,14 @@
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { height: 100%; overflow: hidden; }
+/* clip (not just hidden) so focus or clicks can never scroll the page and
+   push the tab bar off the top on short or narrow windows */
+html, body { height: 100%; overflow: hidden; overflow: clip; }
 body {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--display);
   font-stretch: 88%;
-  overflow: hidden;
 }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
 a { color: inherit; text-decoration: none; }
@@ -954,8 +955,13 @@ button.role-link { border: 0; cursor: pointer; }
 @media (max-width: 900px) {
   html, body { overflow: auto; }
   .screen { height: auto; min-height: 100vh; }
-  /* Narrower windows: keep the tab bar, just smaller */
-  .topbar { gap: 12px; }
+  /* Narrower windows: keep the tab bar, just smaller, and pinned to the top while scrolling */
+  .topbar {
+    gap: 12px;
+    position: sticky; top: 0; z-index: 20;
+    background: var(--bg);
+    padding-bottom: 10px;
+  }
   .tabbar { padding: 0 14px 0 30px; }
   .tab { font-size: 15px; padding-left: 8px; padding-right: 8px; }
   .tabs { gap: 0; }

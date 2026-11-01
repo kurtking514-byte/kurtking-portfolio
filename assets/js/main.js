@@ -85,6 +85,9 @@ function show(id) {
   const i = order.indexOf(id);
   jumps.innerHTML = (i > 0 ? jumpHTML('prev', order[i - 1]) : '') + (i < order.length - 1 ? jumpHTML('next', order[i + 1]) : '');
   document.title = id === 'home' ? 'Kurt Magastino' : `${titles[id]} · Kurt Magastino`;
+  // Small windows scroll: start each screen from the top
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
   // Replay this screen's entrance
   document.body.classList.remove('ready');
   void document.body.offsetWidth;
