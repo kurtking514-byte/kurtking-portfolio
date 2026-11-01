@@ -943,16 +943,6 @@ a { color: inherit; text-decoration: none; }
 }
 .kk-shard.red { background: var(--red); }
 
-@media (prefers-reduced-motion: reduce) {
-  .in, .slab, .shard, .stripe, .portrait { opacity: 1 !important; animation: none !important; }
-  .p5-dots, .p5-ghost, .p5-shard, .kk-burst, .kk-shard { display: none !important; }
-  * { transition-duration: .01s !important; }
-  /* The Dark/Light switch keeps its motion, like the wipes */
-  .theme-btn .knob { transition-duration: .3s !important; }
-  .theme-btn .opt::after, .tab span::after, .rung b::after,
-  .tab span, .rung, .tabbar .tab::before, .skill .stack li, .contact-card { transition-duration: .18s !important; }
-}
-
 /* ---------- Photo viewer ---------- */
 .role.has-photos { cursor: pointer; }
 button.role-link { border: 0; cursor: pointer; }

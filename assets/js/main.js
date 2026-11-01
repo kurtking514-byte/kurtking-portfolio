@@ -321,9 +321,6 @@ const start = location.hash.slice(1);
 show(built.has(start) ? start : 'home');
 
 // ---------- Persona motion ----------
-// Reduced-motion visitors get the still page: no looping effects
-const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
 // Portrait impact (red ghost, halftone dots, stars), KK logo shuffle,
 // and the photo viewer's caption bubble and gliding ribbon
 (() => {
@@ -372,7 +369,7 @@ const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
     hitEnd = setTimeout(() => stage.classList.remove('hit'), 600);
   }
   function loop() { hit(); setTimeout(loop, rnd(3200, 4800)); }
-  if (!calm) setTimeout(loop, 1500); // after the portrait slides in
+  setTimeout(loop, 1500);            // after the portrait slides in
   stage.addEventListener('mouseenter', hit);
 
 
@@ -417,7 +414,7 @@ const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
     }, 4 * 70);
   }
   function kkLoop() { kkHit(); setTimeout(kkLoop, rnd(4500, 6500)); }
-  if (!calm) setTimeout(kkLoop, 2600);          // offset from the portrait so they don't fire together
+  setTimeout(kkLoop, 2600);          // offset from the portrait so they don't fire together
   logo.addEventListener('mouseenter', kkHit);
 
   // Pop the caption bubble each time the photo changes
@@ -475,7 +472,7 @@ const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
         { duration: 300, easing: 'cubic-bezier(.2,.8,.3,1)', fill: 'forwards' });
     };
   }
-  if (!calm) setInterval(next, 2400);
+  setInterval(next, 2400);
 })();
 
 // Opening wipe reveals the page
