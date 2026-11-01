@@ -1,0 +1,12 @@
+# Original photos, old site and backups: kept locally, never published
+# (originals include unblurred documents and location data)
+_source/
+
+# Editor / tool settings
+.claude/
+.vscode/
+
+# OS files
+Thumbs.db
+desktop.ini
+.DS_Store
