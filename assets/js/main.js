@@ -331,6 +331,10 @@ show(built.has(start) ? start : 'home');
 
   const dots = document.createElement('div'); dots.className = 'p5-dots';
   inner.insertBefore(dots, portrait);
+  // the portrait slides in once; coming back to Home later just shows it
+  portrait.addEventListener('animationend', e => {
+    if (e.animationName === 'portraitIn') document.body.classList.add('portrait-done');
+  });
   const ghost = portrait.cloneNode(true);
   ghost.classList.add('p5-ghost');
   ghost.setAttribute('aria-hidden', 'true');
@@ -342,7 +346,7 @@ show(built.has(start) ? start : 'home');
     for (let i = 0; i < n; i++) {
       const s = document.createElement('div');
       s.className = `p5-shard star ${FILLS[i % FILLS.length]}`;
-      s.appendChild(document.createElement('i'));
+      s.appendChild(document.createElement('b')).appendChild(document.createElement('i'));
       const left = Math.random() < .5;
       const w = rnd(42, 78);
       s.style.width = s.style.height = w + 'px';

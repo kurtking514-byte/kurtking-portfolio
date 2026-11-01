@@ -294,6 +294,10 @@ a { color: inherit; text-decoration: none; }
   margin-left: .25em; font-style: normal;
   transform-origin: left center;
   will-change: transform;
+}
+/* the outline sits on an inner layer: drawn once per word, not on every frame of the squeeze */
+.tagline .word-ink {
+  display: block;
   filter: drop-shadow(3px 0 0 var(--outline)) drop-shadow(-3px 0 0 var(--outline))
           drop-shadow(0 3px 0 var(--outline)) drop-shadow(0 -3px 0 var(--outline))
           drop-shadow(6px 5px 0 var(--red));
@@ -364,13 +368,16 @@ a { color: inherit; text-decoration: none; }
   z-index: 2;
   will-change: transform;
   transform: translateX(-48%);
+}
+/* black and white with the red tie is baked into the photo. The outline is on
+   the photo, not the moving box, so it is drawn once instead of every frame */
+.portrait img {
+  height: 100%; width: auto; display: block;
   filter:
     drop-shadow(5px 0 0 var(--outline)) drop-shadow(-5px 0 0 var(--outline))
     drop-shadow(0 5px 0 var(--outline)) drop-shadow(0 -5px 0 var(--outline))
     drop-shadow(14px 8px 0 var(--red-deep));
 }
-/* black and white with the red tie is baked into the photo */
-.portrait img { height: 100%; width: auto; display: block; }
 [data-theme="dark"] .portrait .for-light,
 [data-theme="light"] .portrait .for-dark { display: none; }
 
@@ -495,6 +502,7 @@ a { color: inherit; text-decoration: none; }
 .ready .shard.c { animation: shardIn .5s var(--ease-snap) .65s forwards; }
 .ready .stripe { animation: stripeIn .5s var(--ease-snap) .5s forwards; }
 .ready .portrait { animation: portraitIn .9s var(--ease-out) .45s forwards; }
+.portrait-done .portrait { animation: none; opacity: 1; }
 @keyframes slabIn { from { opacity: 1; clip-path: polygon(0 6%, 0 6%, 8% 100%, 8% 100%); } to { opacity: 1; } }
 @keyframes shardIn { from { opacity: 0; transform: translate(-80px, -40px) rotate(-12deg) scale(.6); } to { opacity: 1; transform: none; } }
 @keyframes stripeIn { from { opacity: 1; transform: rotate(14deg) scaleX(0); } to { opacity: 1; transform: rotate(14deg) scaleX(1); } }
@@ -618,7 +626,6 @@ a { color: inherit; text-decoration: none; }
 #sch-shs .wins { margin-top: 1.4vh; gap: .8vh; }
 #sch-shs h3 { margin-top: 1.4vh; }
 .badge.contain { object-fit: contain; padding: 4px; } /* shield-shaped logo needs room */
-.school-photo.logo-only img { object-fit: contain; padding: 18%; }
 .school-head { display: flex; align-items: center; gap: 14px; }
 .badge {
   width: clamp(46px, 7vh, 60px); aspect-ratio: 1;
@@ -854,6 +861,9 @@ a { color: inherit; text-decoration: none; }
    unlike an SVG colour filter, which is slow on a photo this size */
 .p5-ghost {
   animation: none !important; opacity: 0 !important; filter: none !important; z-index: 1 !important;
+}
+.p5-ghost::before {
+  content: ""; position: absolute; inset: 0;
   background: var(--red);
   -webkit-mask: var(--ghost) center / 100% 100% no-repeat;
           mask: var(--ghost) center / 100% 100% no-repeat;
@@ -899,7 +909,10 @@ a { color: inherit; text-decoration: none; }
   position: absolute; z-index: 3; pointer-events: none;
   will-change: transform, opacity;
   animation: shardStab .5s var(--ease-snap) forwards;
-  /* sticker outline + red offset, like the portrait */
+}
+/* sticker outline + red offset, like the portrait, on a layer that doesn't move */
+.p5-shard b {
+  position: absolute; inset: 0;
   filter: drop-shadow(3px 0 0 var(--so)) drop-shadow(-3px 0 0 var(--so))
           drop-shadow(0 3px 0 var(--so)) drop-shadow(0 -3px 0 var(--so))
           drop-shadow(6px 5px 0 var(--red-deep));
