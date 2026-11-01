@@ -293,6 +293,7 @@ a { color: inherit; text-decoration: none; }
   display: inline-block; vertical-align: middle;
   margin-left: .25em; font-style: normal;
   transform-origin: left center;
+  will-change: transform;
   filter: drop-shadow(3px 0 0 var(--outline)) drop-shadow(-3px 0 0 var(--outline))
           drop-shadow(0 3px 0 var(--outline)) drop-shadow(0 -3px 0 var(--outline))
           drop-shadow(6px 5px 0 var(--red));
@@ -849,7 +850,17 @@ a { color: inherit; text-decoration: none; }
 
 /* ---------- Persona motion: portrait impact and KK logo (main.js) ---------- */
 /* Solid red cutout behind the portrait that snaps out on impact */
-.p5-ghost { animation: none !important; opacity: 0 !important; filter: url(#p5Red) !important; z-index: 1 !important; }
+/* A red silhouette cut from the photo with a mask: the graphics card draws it,
+   unlike an SVG colour filter, which is slow on a photo this size */
+.p5-ghost {
+  animation: none !important; opacity: 0 !important; filter: none !important; z-index: 1 !important;
+  background: var(--red);
+  -webkit-mask: var(--ghost) center / 100% 100% no-repeat;
+          mask: var(--ghost) center / 100% 100% no-repeat;
+}
+.p5-ghost img { visibility: hidden; }
+[data-theme="dark"]  .p5-ghost { --ghost: url("../images/portrait-dark.webp"); }
+[data-theme="light"] .p5-ghost { --ghost: url("../images/portrait-light.webp"); }
 .stage.hit .p5-ghost { opacity: 1 !important; animation: ghostSnap .45s var(--ease-snap) forwards !important; }
 @keyframes ghostSnap {
   0%   { transform: translateX(-48%) translate(0, 0) rotate(0); }
@@ -872,6 +883,7 @@ a { color: inherit; text-decoration: none; }
   width: 110%; aspect-ratio: 1;
   transform: translate(-50%, -50%) scale(.4) rotate(-10deg);
   z-index: 1; pointer-events: none; opacity: 0;
+  will-change: transform, opacity;
   background: radial-gradient(circle, var(--fg) 28%, transparent 31%) 0 0 / 14px 14px;
   clip-path: polygon(50% 0,58% 30%,88% 12%,70% 40%,100% 50%,70% 60%,90% 90%,58% 70%,50% 100%,42% 70%,10% 88%,30% 60%,0 50%,30% 40%,12% 10%,42% 30%);
 }
@@ -885,6 +897,7 @@ a { color: inherit; text-decoration: none; }
 /* Sharp shards that stab in and fly off */
 .p5-shard {
   position: absolute; z-index: 3; pointer-events: none;
+  will-change: transform, opacity;
   animation: shardStab .5s var(--ease-snap) forwards;
   /* sticker outline + red offset, like the portrait */
   filter: drop-shadow(3px 0 0 var(--so)) drop-shadow(-3px 0 0 var(--so))

@@ -359,12 +359,17 @@ const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
       setTimeout(() => s.remove(), 700 + i * 35);
     }
   }
+  // skip work nobody can see: another screen is open or the tab is in the background
+  const seen = el => !document.hidden && el.offsetParent !== null;
+  let hitEnd;
   function hit() {
+    if (!seen(stage)) return;
+    clearTimeout(hitEnd);            // a new hit must not be cut short by the last one's cleanup
     stage.classList.remove('hit');
     void stage.offsetWidth;          // restart the CSS animations
     stage.classList.add('hit');
     shards();
-    setTimeout(() => stage.classList.remove('hit'), 600);
+    hitEnd = setTimeout(() => stage.classList.remove('hit'), 600);
   }
   function loop() { hit(); setTimeout(loop, rnd(3200, 4800)); }
   if (!calm) setTimeout(loop, 1500); // after the portrait slides in
@@ -388,7 +393,10 @@ const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
       k.style.transform = `rotate(${rnd(-16, 16)}deg) translateY(${rnd(-4, 6)}px)`;
     });
   }
+  let kkBusy = false;
   function kkHit() {
+    if (kkBusy || !seen(logo)) return;   // let a shuffle finish before starting another
+    kkBusy = true;
     for (let i = 0; i < 4; i++) setTimeout(kkFrame, i * 70);
     setTimeout(() => {
       ks.forEach(k => k.removeAttribute('style'));          // back to the real scraps
@@ -405,7 +413,7 @@ const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
         logo.appendChild(sh);
         setTimeout(() => sh.remove(), 500);
       }
-      setTimeout(() => logo.classList.remove('hit', 'punch'), 550);
+      setTimeout(() => { logo.classList.remove('hit', 'punch'); kkBusy = false; }, 550);
     }, 4 * 70);
   }
   function kkLoop() { kkHit(); setTimeout(kkLoop, rnd(4500, 6500)); }
