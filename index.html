@@ -39,18 +39,9 @@
           <div class="stripe"></div>
         </div>
         <div class="portrait">
-          <!-- Placeholder silhouette: swap for the real suit photos later -->
-          <svg viewBox="0 0 400 520" role="img" aria-label="Portrait placeholder">
-            <rect x="178" y="160" width="44" height="70" fill="var(--head)"/>
-            <ellipse cx="200" cy="112" rx="62" ry="74" fill="var(--head)"/>
-            <path d="M20 520 C24 340 100 262 200 248 C300 262 376 340 380 520 Z" fill="var(--suit)"/>
-            <path d="M158 250 L200 372 L242 250 L222 244 L200 262 L178 244 Z" fill="var(--shirt)"/>
-            <path d="M150 252 L198 400 L168 300 L176 280 Z" fill="var(--lapel)"/>
-            <path d="M250 252 L202 400 L232 300 L224 280 Z" fill="var(--lapel)"/>
-            <path d="M189 262 L211 262 L207 282 L193 282 Z" fill="var(--red)"/>
-            <path d="M193 282 L207 282 L218 372 L200 396 L182 372 Z" fill="var(--red)"/>
-          </svg>
-          <span class="ph-label">Photo placeholder</span>
+          <!-- one photo per theme: black shirt for dark, white shirt for light -->
+          <img class="for-dark" src="assets/images/portrait-dark.webp" alt="Kurt Magastino in a black suit and red tie">
+          <img class="for-light" src="assets/images/portrait-light.webp" alt="Kurt Magastino in a black suit, white shirt and red tie">
         </div>
         <div class="front">
           <div class="shard b"></div>
@@ -64,7 +55,7 @@
         <span class="first in">Kurt King D.</span>
         <span class="last">Magastino</span>
       </h1>
-      <p class="tagline in"><span>I build where hardware meets software,</span><span>with AI as my main tool.</span></p>
+      <p class="tagline in"><span class="line">I am a<em class="word"><strong>Full-stack developer</strong></em></span></p>
       <p class="meta in"><span><b>BS Computer Science</b> · University of the Cordilleras</span></p>
     </section>
   </main>
@@ -216,7 +207,7 @@
           <b>POSEIDON</b><span>Hardware · 2026</span>
         </button>
         </div>
-        <p class="also in"><b>Also built</b><span><button class="also-link" type="button" data-gallery="balong">B.A.L.O.N.G ▶</button> · Prompt Refiner · Local Agent Forge</span></p>
+        <p class="also in"><b>Also built</b><span><button class="also-link" type="button" data-gallery="balong">B.A.L.O.N.G ▶</button> · <button class="also-link" type="button" data-gallery="refiner">Prompt Refiner</button> · Local Agent Forge</span></p>
       </div>
 
       <div class="school-view in">
@@ -385,6 +376,10 @@
   <div class="lb-thumbs" id="lbThumbs"></div>
 </div>
 
+<!-- red tint for the portrait's impact ghost -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="p5Red"><feFlood flood-color="#E60023"/><feComposite in2="SourceAlpha" operator="in"/></filter>
+</svg>
 <script src="assets/js/main.js"></script>
 </body>
 </html>

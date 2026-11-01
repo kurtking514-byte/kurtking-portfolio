@@ -11,7 +11,7 @@ A one-screen-per-section site with a bold red, black and cream design inspired b
 | **Home** | Name, tagline, course, portrait |
 | **Education** | School ladder: College, Senior High, Junior High, Elementary, with photos and achievements |
 | **Experience** | Phone shop repair tech and barangay office assistant (SPES), with photo documentation |
-| **Projects** | Norman Cellphone Center, ROBERT0 and POSEIDON, with photos and videos |
+| **Projects** | Norman Cellphone Center, ROBERT0 and POSEIDON, plus B.A.L.O.N.G and Prompt Refiner, with photos and videos |
 | **Skills** | Languages, web and apps, AI, hardware, tools and work skills |
 | **Contact** | Email, GitHub and a downloadable resume |
 

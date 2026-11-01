@@ -170,8 +170,11 @@ const galleries = {
   norman: {
     title: 'Norman Cellphone Center',
     photos: [
-      { src: 'assets/images/proj-norman-1.jpg', caption: 'Staff admin dashboard' },
-      { src: 'assets/images/proj-norman-2.jpg', caption: 'Admin sign-in' },
+      { src: 'assets/images/proj-norman-n1.jpg', caption: 'Staff dashboard: what needs attention today' },
+      { src: 'assets/images/proj-norman-n2.jpg', caption: 'Live chat: watching the AI chatbot and taking over when needed' },
+      { src: 'assets/images/proj-norman-n5.jpg', caption: 'Staff sign-in' },
+      { src: 'assets/images/proj-norman-n3.jpg', caption: 'Repairs: tracking each job from check-in to pickup' },
+      { src: 'assets/images/proj-norman-n4.jpg', caption: 'Inventory: 134 products with prices and stock' },
       { src: 'assets/images/proj-norman-3.jpg', caption: "The shop's Facebook page, where the Messenger bot runs" },
     ],
   },
@@ -190,6 +193,15 @@ const galleries = {
     title: 'B.A.L.O.N.G',
     photos: [
       { video: 'assets/video/proj-balong.mp4', poster: 'assets/images/proj-balong-poster.jpg', caption: 'B.A.L.O.N.G in action' },
+    ],
+  },
+  refiner: {
+    title: 'Prompt Refiner',
+    photos: [
+      { src: 'assets/images/proj-refiner-1.png', caption: 'Step 1: describe a rough idea' },
+      { src: 'assets/images/proj-refiner-2.png', caption: 'The AI reads the idea and finds what is missing' },
+      { src: 'assets/images/proj-refiner-3.png', caption: 'Step 2: questions written for that idea, not a fixed checklist' },
+      { src: 'assets/images/proj-refiner-4.png', caption: 'Step 3: the finished prompt, ready to copy or paste in' },
     ],
   },
   poseidon: {
@@ -307,6 +319,156 @@ document.addEventListener('keydown', e => {
 
 const start = location.hash.slice(1);
 show(built.has(start) ? start : 'home');
+
+// ---------- Persona motion ----------
+// Reduced-motion visitors get the still page: no looping effects
+const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Portrait impact (red ghost, halftone dots, stars), KK logo shuffle,
+// and the photo viewer's caption bubble and gliding ribbon
+(() => {
+  const stage = document.querySelector('.stage');
+  const inner = document.getElementById('stageInner');
+  const portrait = inner.querySelector('.portrait');
+  const rnd = (a, b) => a + Math.random() * (b - a);
+
+  const dots = document.createElement('div'); dots.className = 'p5-dots';
+  inner.insertBefore(dots, portrait);
+  const ghost = portrait.cloneNode(true);
+  ghost.classList.add('p5-ghost');
+  ghost.setAttribute('aria-hidden', 'true');
+  inner.insertBefore(ghost, portrait);
+
+  const FILLS = ['red', 'paper', 'ink'];
+  function shards() {
+    const n = Math.round(rnd(3, 5));
+    for (let i = 0; i < n; i++) {
+      const s = document.createElement('div');
+      s.className = `p5-shard star ${FILLS[i % FILLS.length]}`;
+      s.appendChild(document.createElement('i'));
+      const left = Math.random() < .5;
+      const w = rnd(42, 78);
+      s.style.width = s.style.height = w + 'px';
+      s.style.left = (left ? rnd(-4, 22) : rnd(62, 88)) + '%';
+      s.style.top = rnd(8, 80) + '%';
+      s.style.setProperty('--fx', (left ? -1 : 1) * rnd(80, 160) + 'px');
+      s.style.setProperty('--fy', rnd(-60, 60) + 'px');
+      s.style.setProperty('--r', rnd(-35, 35) + 'deg');
+      s.style.animationDelay = i * 35 + 'ms';
+      inner.appendChild(s);
+      setTimeout(() => s.remove(), 700 + i * 35);
+    }
+  }
+  function hit() {
+    stage.classList.remove('hit');
+    void stage.offsetWidth;          // restart the CSS animations
+    stage.classList.add('hit');
+    shards();
+    setTimeout(() => stage.classList.remove('hit'), 600);
+  }
+  function loop() { hit(); setTimeout(loop, rnd(3200, 4800)); }
+  if (!calm) setTimeout(loop, 1500); // after the portrait slides in
+  stage.addEventListener('mouseenter', hit);
+
+
+  // KK logo: letters flick through ransom-note scraps, then punch back
+  const logo = document.querySelector('.logo');
+  const ks = logo.querySelectorAll('.rk');
+  const kb = document.createElement('div'); kb.className = 'kk-burst'; logo.prepend(kb);
+  const SCRAPS = [
+    { background: 'var(--paper)', color: 'var(--ink)',   fontFamily: 'Georgia, serif', fontStyle: 'italic' },
+    { background: 'var(--ink)',   color: 'var(--paper)', fontFamily: '"Arial Black", sans-serif', fontStyle: 'normal' },
+    { background: 'var(--red)',   color: 'var(--paper)', fontFamily: 'var(--display)', fontStyle: 'normal' },
+    { background: 'var(--paper)', color: 'var(--red)',   fontFamily: '"Courier New", monospace', fontStyle: 'normal' },
+    { background: 'var(--ink)',   color: 'var(--red)',   fontFamily: 'Impact, sans-serif', fontStyle: 'normal' },
+  ];
+  function kkFrame() {
+    ks.forEach(k => {
+      Object.assign(k.style, SCRAPS[Math.floor(Math.random() * SCRAPS.length)]);
+      k.style.transform = `rotate(${rnd(-16, 16)}deg) translateY(${rnd(-4, 6)}px)`;
+    });
+  }
+  function kkHit() {
+    for (let i = 0; i < 4; i++) setTimeout(kkFrame, i * 70);
+    setTimeout(() => {
+      ks.forEach(k => k.removeAttribute('style'));          // back to the real scraps
+      logo.classList.remove('hit', 'punch'); void logo.offsetWidth;
+      logo.classList.add('hit', 'punch');
+      for (let i = 0; i < 3; i++) {
+        const sh = document.createElement('div');
+        sh.className = 'kk-shard' + (i === 1 ? ' red' : '');
+        sh.style.left = rnd(10, 80) + '%';
+        sh.style.top = rnd(-10, 90) + '%';
+        sh.style.setProperty('--fx', rnd(-40, 40) + 'px');
+        sh.style.setProperty('--fy', rnd(-30, 30) + 'px');
+        sh.style.setProperty('--r', rnd(-60, 60) + 'deg');
+        logo.appendChild(sh);
+        setTimeout(() => sh.remove(), 500);
+      }
+      setTimeout(() => logo.classList.remove('hit', 'punch'), 550);
+    }, 4 * 70);
+  }
+  function kkLoop() { kkHit(); setTimeout(kkLoop, rnd(4500, 6500)); }
+  if (!calm) setTimeout(kkLoop, 2600);          // offset from the portrait so they don't fire together
+  logo.addEventListener('mouseenter', kkHit);
+
+  // Pop the caption bubble each time the photo changes
+  const cap = document.getElementById('lbCap');
+  let lastIndex = 0;
+  new MutationObserver(() => {
+    cap.classList.remove('say'); void cap.offsetWidth; cap.classList.add('say');
+    // glide the ribbon the way you moved (wrap-around counts as one step)
+    const box = document.getElementById('lightbox');
+    if (box.dataset.seen) {
+      let d = lbIndex - lastIndex;
+      if (Math.abs(d) > lbList.length / 2) d = -Math.sign(d);
+      box.style.setProperty('--dir', d < 0 ? -1 : 1);
+      box.classList.remove('pan'); void box.offsetWidth; box.classList.add('pan');
+    }
+    lastIndex = lbIndex;
+    box.dataset.seen = '1';
+  }).observe(cap, { childList: true });
+  // closing resets it, so the next open gets the full slash-in again
+  const lbox = document.getElementById('lightbox');
+  new MutationObserver(() => {
+    if (lbox.hidden) { delete lbox.dataset.seen; lbox.classList.remove('pan'); }
+  }).observe(lbox, { attributes: true, attributeFilter: ['hidden'] });
+})();
+
+// "I am a ___": the word box squeezes shut, swaps the word, and pops back open
+(() => {
+  const WORDS = ['Full-stack developer', 'Robot builder', 'Hardware developer', 'Computer Science student'];
+  const box = document.querySelector('.tagline .word'), txt = box.querySelector('strong');
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  // jagged outline sized to the box: a spike roughly every 30px along the top and bottom
+  function spike() {
+    const w = txt.offsetWidth, h = txt.offsetHeight, d = 13;
+    const pct = (x, y) => `${(x / w * 100).toFixed(2)}% ${(y / h * 100).toFixed(2)}%`;
+    const n = Math.max(3, Math.round(w / 30)), pts = [];
+    for (let i = 0; i <= n; i++) pts.push(pct(w * i / n + rnd(-3, 3), i % 2 ? d + rnd(0, 5) : rnd(0, 3)));
+    pts.push(pct(w, h * .3), pct(w - d - 4, h * .5), pct(w, h * .72));
+    for (let i = n; i >= 0; i--) pts.push(pct(w * i / n + rnd(-3, 3), i % 2 ? h - d - rnd(0, 5) : h - rnd(0, 3)));
+    pts.push(pct(0, h * .7), pct(d + 4, h * .48), pct(0, h * .26));
+    txt.style.clipPath = `polygon(${pts.join(',')})`;
+  }
+  spike();
+  document.fonts?.ready.then(spike);
+  let i = 0;
+  function next() {
+    const shut = box.animate(
+      [{ transform: 'scale(1,1)' }, { transform: 'scale(.06,1.25)' }],
+      { duration: 170, easing: 'cubic-bezier(.6,0,.9,.4)', fill: 'forwards' });
+    shut.onfinish = () => {
+      i = (i + 1) % WORDS.length;
+      txt.textContent = WORDS[i];
+      spike();
+      box.animate(
+        [{ transform: 'scale(.06,1.25)' }, { transform: 'scale(1.12,.88)', offset: .6 }, { transform: 'scale(1,1)' }],
+        { duration: 300, easing: 'cubic-bezier(.2,.8,.3,1)', fill: 'forwards' });
+    };
+  }
+  if (!calm) setInterval(next, 2400);
+})();
 
 // Opening wipe reveals the page
 requestAnimationFrame(() => wipe.classList.add('leave'));

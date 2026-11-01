@@ -22,10 +22,6 @@
   --line: #2a2a2a;
   --outline: var(--paper);
   --jump-fill: var(--ink);
-  --suit: #0b0b0b;
-  --lapel: #1e1e1e;
-  --shirt: #F5F3EE;
-  --head: #6a6a6a;
 }
 /* Light theme = white suit */
 [data-theme="light"] {
@@ -36,10 +32,6 @@
   --line: #c4b69e;
   --outline: #231D16;
   --jump-fill: #F3EEE5;
-  --suit: #efe9de;
-  --lapel: #d6ccbb;
-  --shirt: #231D16;
-  --head: #9a9a9a;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -117,8 +109,8 @@ a { color: inherit; text-decoration: none; }
   gap: 10px;
 }
 /* Ransom-note monogram: each letter cut from a different "scrap" */
-.logo { gap: 2px; }
-.logo .rk { display: inline-block; line-height: 1; padding: 3px 7px 4px; }
+.logo { gap: 2px; position: relative; }
+.logo .rk { position: relative; z-index: 1; display: inline-block; line-height: 1; padding: 3px 7px 4px; }
 .logo .r1 {
   background: var(--fg); color: var(--bg);
   transform: rotate(-7deg);
@@ -295,9 +287,24 @@ a { color: inherit; text-decoration: none; }
   font-size: clamp(19px, 2.9vh, 26px);
   line-height: 1.35;
 }
-.tagline span { display: block; }
-.tagline span:nth-child(1) { margin-left: calc(var(--step) * 2); }
-.tagline span:nth-child(2) { margin-left: calc(var(--step) * 3); }
+.tagline .line { display: block; margin: -.5em 0 .8em calc(var(--step) * 2); }
+/* the word sits in a spiky box that squeezes shut, swaps, and pops back open (main.js) */
+.tagline .word {
+  display: inline-block; vertical-align: middle;
+  margin-left: .25em; font-style: normal;
+  transform-origin: left center;
+  filter: drop-shadow(3px 0 0 var(--outline)) drop-shadow(-3px 0 0 var(--outline))
+          drop-shadow(0 3px 0 var(--outline)) drop-shadow(0 -3px 0 var(--outline))
+          drop-shadow(6px 5px 0 var(--red));
+}
+.tagline .word strong {
+  display: block; white-space: nowrap;
+  padding: .72em 1.5em .66em;
+  background: var(--jump-fill); color: var(--fg);   /* follows Dark/Light like the Next arrow */
+  font-family: var(--display); font-weight: 900; font-stretch: 88%;
+  text-transform: uppercase; letter-spacing: .02em;
+  font-size: 1.2em; line-height: 1;
+}
 .meta {
   margin-top: 1.8vh;
   margin-left: calc(var(--step) * 4);
@@ -361,19 +368,10 @@ a { color: inherit; text-decoration: none; }
     drop-shadow(0 5px 0 var(--outline)) drop-shadow(0 -5px 0 var(--outline))
     drop-shadow(14px 8px 0 var(--red-deep));
 }
-.portrait svg { height: 100%; width: auto; display: block; }
-.portrait img { height: 100%; width: auto; display: block; filter: grayscale(1) contrast(1.15); }
-.ph-label {
-  position: absolute;
-  left: 50%; top: 18%;
-  transform: translateX(-50%) rotate(-4deg);
-  background: var(--bg);
-  color: var(--fg);
-  border: 2px dashed var(--muted);
-  padding: 4px 10px;
-  font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
-  white-space: nowrap;
-}
+/* black and white with the red tie is baked into the photo */
+.portrait img { height: 100%; width: auto; display: block; }
+[data-theme="dark"] .portrait .for-light,
+[data-theme="light"] .portrait .for-dark { display: none; }
 
 /* ---------- Footer ---------- */
 .foot {
@@ -849,8 +847,92 @@ a { color: inherit; text-decoration: none; }
 
 .ready .proj-screen .school-view.in { animation: rise .6s var(--ease-out) .3s forwards; }
 
+/* ---------- Persona motion: portrait impact and KK logo (main.js) ---------- */
+/* Solid red cutout behind the portrait that snaps out on impact */
+.p5-ghost { animation: none !important; opacity: 0 !important; filter: url(#p5Red) !important; z-index: 1 !important; }
+.stage.hit .p5-ghost { opacity: 1 !important; animation: ghostSnap .45s var(--ease-snap) forwards !important; }
+@keyframes ghostSnap {
+  0%   { transform: translateX(-48%) translate(0, 0) rotate(0); }
+  25%  { transform: translateX(-48%) translate(-26px, -10px) rotate(-3deg); }
+  100% { transform: translateX(-48%) translate(-14px, -4px) rotate(-1.5deg); opacity: 0; }
+}
+
+/* Portrait punch: quick tilt-and-bounce like a menu selection */
+.stage.hit .portrait:not(.p5-ghost) { animation: punch .45s var(--ease-out) !important; opacity: 1; }
+@keyframes punch {
+  0%   { transform: translateX(-48%) scale(1) rotate(0); }
+  20%  { transform: translateX(-48%) scale(1.06) rotate(-2.5deg); }
+  55%  { transform: translateX(-48%) scale(.99) rotate(.8deg); }
+  100% { transform: translateX(-48%) scale(1) rotate(0); }
+}
+
+/* Halftone dots that flash in a jagged burst shape */
+.p5-dots {
+  position: absolute; left: 50%; top: 42%;
+  width: 110%; aspect-ratio: 1;
+  transform: translate(-50%, -50%) scale(.4) rotate(-10deg);
+  z-index: 1; pointer-events: none; opacity: 0;
+  background: radial-gradient(circle, var(--fg) 28%, transparent 31%) 0 0 / 14px 14px;
+  clip-path: polygon(50% 0,58% 30%,88% 12%,70% 40%,100% 50%,70% 60%,90% 90%,58% 70%,50% 100%,42% 70%,10% 88%,30% 60%,0 50%,30% 40%,12% 10%,42% 30%);
+}
+.stage.hit .p5-dots { animation: dotsPop .55s var(--ease-out); }
+@keyframes dotsPop {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(.4) rotate(-10deg); }
+  25%  { opacity: .55; }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.05) rotate(4deg); }
+}
+
+/* Sharp shards that stab in and fly off */
+.p5-shard {
+  position: absolute; z-index: 3; pointer-events: none;
+  animation: shardStab .5s var(--ease-snap) forwards;
+  /* sticker outline + red offset, like the portrait */
+  filter: drop-shadow(3px 0 0 var(--so)) drop-shadow(-3px 0 0 var(--so))
+          drop-shadow(0 3px 0 var(--so)) drop-shadow(0 -3px 0 var(--so))
+          drop-shadow(6px 5px 0 var(--red-deep));
+}
+.p5-shard i { position: absolute; inset: 0; background: var(--sf); }
+.p5-shard.star i  { clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); }
+.p5-shard.red   { --sf: var(--red);   --so: var(--paper); }
+.p5-shard.paper { --sf: var(--paper); --so: var(--ink); }
+.p5-shard.ink   { --sf: var(--ink);   --so: var(--paper); }
+@keyframes shardStab {
+  0%   { opacity: 0; transform: translate(var(--fx), var(--fy)) rotate(var(--r)) scale(.3); }
+  30%  { opacity: 1; transform: translate(0, 0) rotate(var(--r)) scale(1); }
+  70%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(calc(var(--fx) * -.4), calc(var(--fy) * -.4)) rotate(var(--r)) scale(.9); }
+}
+
+/* KK logo: ransom-note letters shuffle through different scraps, then
+      punch back into place with a small red burst and shards */
+.kk-burst {
+  position: absolute; left: 50%; top: 55%; z-index: 0;
+  width: 92px; height: 92px; margin: -46px 0 0 -46px;
+  background: var(--red);
+  clip-path: polygon(50% 0,60% 32%,92% 14%,72% 44%,100% 56%,68% 64%,82% 96%,52% 74%,30% 100%,32% 68%,0 70%,24% 48%,4% 20%,38% 30%);
+  opacity: 0; pointer-events: none;
+}
+.logo.hit .kk-burst { animation: kkBurst .5s var(--ease-out); }
+@keyframes kkBurst {
+  0%   { opacity: 0; transform: scale(.2) rotate(-30deg); }
+  30%  { opacity: 1; transform: scale(1.1) rotate(6deg); }
+  100% { opacity: 0; transform: scale(1.35) rotate(14deg); }
+}
+.logo.punch .r1 { animation: kkPunch1 .4s var(--ease-out); }
+.logo.punch .r2 { animation: kkPunch2 .4s var(--ease-out) .04s; }
+@keyframes kkPunch1 { 0% { transform: rotate(-7deg) scale(1.35); } 100% { transform: rotate(-7deg) scale(1); } }
+@keyframes kkPunch2 { 0% { transform: rotate(6deg) translate(3px, 10px) scale(1.35); } 100% { transform: rotate(6deg) translate(3px, 10px) scale(1); } }
+.kk-shard {
+  position: absolute; z-index: 2; pointer-events: none;
+  width: 18px; height: 10px; background: var(--fg);
+  clip-path: polygon(0 40%, 100% 0, 60% 100%);
+  animation: shardStab .45s var(--ease-snap) forwards;
+}
+.kk-shard.red { background: var(--red); }
+
 @media (prefers-reduced-motion: reduce) {
   .in, .slab, .shard, .stripe, .portrait { opacity: 1 !important; animation: none !important; }
+  .p5-dots, .p5-ghost, .p5-shard, .kk-burst, .kk-shard { display: none !important; }
   * { transition-duration: .01s !important; }
   /* The Dark/Light switch keeps its motion, like the wipes */
   .theme-btn .knob { transition-duration: .3s !important; }
@@ -875,13 +957,37 @@ button.role-link { border: 0; cursor: pointer; }
 .lb-backdrop {
   position: absolute; inset: 0; z-index: -1;
   background: rgba(12, 12, 12, .97);
-  animation: lbIn .3s var(--ease-snap);
+  animation: lbIn .15s var(--ease-snap);
 }
-.lb-backdrop::after { /* red slash across the backdrop */
-  content: ""; position: absolute; left: -10%; right: -10%; top: 58%;
-  height: 22vh; background: var(--red-block); opacity: .9;
-  transform: rotate(-8deg);
+/* Spiky red ribbon with halftone dots and a cream offset edge; its middle
+   zigzags up and down. It slides in when the viewer opens and glides along
+   with Next / Prev. */
+.lb-backdrop::before, .lb-backdrop::after {
+  content: ""; position: absolute;
+  left: -20vw; right: auto; width: 140vw; top: 0; bottom: 0; height: auto;
+  opacity: 1;
+  transform: none;
+  clip-path: polygon(0.0% 68%, 5.0% 44%, 10.0% 55%, 15.0% 31%, 20.0% 42%, 25.0% 23%, 30.0% 33%, 35.0% 14%, 40.0% 41%, 45.0% 31%, 50.0% 50%, 55.0% 42%, 60.0% 60%, 65.0% 40%, 70.0% 51%, 75.0% 32%, 80.0% 41%, 85.0% 16%, 90.0% 31%, 95.0% 7%, 100.0% 20%, 100.0% 53%, 95.0% 46%, 90.0% 62%, 85.0% 53%, 80.0% 71%, 75.0% 66%, 70.0% 88%, 65.0% 74%, 60.0% 97%, 55.0% 76%, 50.0% 89%, 45.0% 65%, 40.0% 76%, 35.0% 52%, 30.0% 64%, 25.0% 56%, 20.0% 72%, 15.0% 66%, 10.0% 89%, 5.0% 80%, 0.0% 97%);
 }
+.lb-backdrop::before {               /* cream edge peeking out behind */
+  background: var(--paper);
+  translate: 16px 14px;
+  animation: ribbonIn .34s var(--ease-out) .04s both;
+}
+.lb-backdrop::after {                /* red ribbon with dark halftone dots */
+  background:
+    radial-gradient(circle, rgba(0,0,0,.28) 32%, transparent 36%) 0 0 / 13px 13px,
+    linear-gradient(100deg, var(--red-block), var(--red) 55%, var(--red-deep));
+  animation: ribbonIn .3s var(--ease-out) both, flash .35s ease-out both;
+}
+@keyframes ribbonIn { from { clip-path: polygon(0.0% 68%, 0.0% 68%, 0.0% 68%, 0.0% 68%, 0.0% 68%, 0.0% 68%, 0.0% 68%, 0.0% 68%, 0.0% 68%, 0.0% 68%, 0.0% 68%, 0.0% 68%, 0.0% 68%, 0.0% 68%, 0.0% 68%, 0.0% 68%, 0.0% 68%, 0.0% 68%, 0.0% 68%, 0.0% 68%, 0.0% 68%, 0.0% 97%, 0.0% 97%, 0.0% 97%, 0.0% 97%, 0.0% 97%, 0.0% 97%, 0.0% 97%, 0.0% 97%, 0.0% 97%, 0.0% 97%, 0.0% 97%, 0.0% 97%, 0.0% 97%, 0.0% 97%, 0.0% 97%, 0.0% 97%, 0.0% 97%, 0.0% 97%, 0.0% 97%, 0.0% 97%, 0.0% 97%); } }
+@keyframes flash { from { filter: brightness(1.9); } to { filter: none; } }
+
+/* Next / Prev: the ribbon glides the way you moved, the cream edge trails behind */
+.lightbox.pan .lb-backdrop::after  { animation: panRed .5s var(--ease-out); }
+.lightbox.pan .lb-backdrop::before { animation: panCream .6s var(--ease-out); }
+@keyframes panRed   { from { translate: calc(var(--dir, 1) * 14vw) 0; } }
+@keyframes panCream { from { translate: calc(var(--dir, 1) * 20vw + 16px) 14px; } }
 @keyframes lbIn { from { opacity: 0; } to { opacity: 1; } }
 .lb-top { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
 .lb-title {
@@ -914,10 +1020,30 @@ button.role-link { border: 0; cursor: pointer; }
   65%  { opacity: 1; transform: scale(1.03) rotate(1deg); }
   100% { transform: none; }
 }
-.lb-stage figcaption {
+.lb-stage figcaption { /* speech bubble, top right of the photo */
   font-family: var(--dialogue); font-weight: 800;
-  font-size: clamp(15px, 2.3vh, 19px);
-  background: var(--ink); padding: 4px 14px;
+  position: absolute; top: -1.5vh; right: -6vw; z-index: 2;
+  max-width: 34vw;
+  padding: 2.4vh 3.2vw 2.6vh 4.6vw;
+  background: var(--paper);
+  color: var(--paper);
+  font-size: clamp(16px, 2.5vh, 21px);
+  line-height: 1.25;
+  text-align: center;
+  clip-path: polygon(0 78%, 16% 24%, 13% 4%, 44% 14%, 74% 5%, 100% 0, 97% 100%, 62% 86%, 34% 97%, 18% 84%);
+  transform: rotate(-3deg);
+  filter: drop-shadow(8px 8px 0 var(--red-deep));
+}
+.lb-stage figcaption::before {
+  content: ""; position: absolute; inset: 6px 7px 6px 10px; z-index: -1;
+  background: #1c0306;
+  clip-path: inherit;
+}
+.lb-stage figcaption.say { animation: bubbleIn .42s var(--ease-snap); }
+@keyframes bubbleIn {
+  0%   { opacity: 0; transform: rotate(-12deg) scale(.3) translateX(40px); }
+  65%  { opacity: 1; transform: rotate(-1deg) scale(1.06); }
+  100% { transform: rotate(-3deg) scale(1); }
 }
 .lb-nav {
   position: absolute; top: 50%;
@@ -981,4 +1107,6 @@ button.role-link { border: 0; cursor: pointer; }
   .hero { grid-template-columns: 1fr; padding: 4vh 0; }
   .stage { height: 60vh; }
   .bg-mark { font-size: 40vh; }
+  /* keep the caption bubble on screen */
+  .lb-stage figcaption { right: 0; max-width: 72vw; padding: 2vh 6vw 2.2vh 11vw; }
 }
