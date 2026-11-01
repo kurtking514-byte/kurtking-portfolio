@@ -4,6 +4,39 @@ const root = document.documentElement;
 const wipe = document.getElementById('wipe');
 const toast = document.getElementById('toast');
 
+// Safety switch, part 1: a computer drawing without its graphics chip (acceleration
+// off, or an old laptop the browser doesn't trust) is known before the first frame,
+// so it starts light, opening entrance included
+function softwareDrawing() {
+  try {
+    const gl = document.createElement('canvas').getContext('webgl');
+    if (!gl) return true;
+    const info = gl.getExtension('WEBGL_debug_renderer_info');
+    const name = info ? gl.getParameter(info.UNMASKED_RENDERER_WEBGL) : '';
+    gl.getExtension('WEBGL_lose_context')?.loseContext();
+    return /swiftshader|llvmpipe|software|basic render/i.test(name);
+  } catch (e) { return false; }
+}
+// Part 2: otherwise time the first couple of seconds of frames. If this computer
+// can't keep up (typical frame slower than ~45 per second), switch to lighter
+// effects. Add ?lite to the address to see the light version on any computer.
+if (/[?&]lite\b/.test(location.search) || softwareDrawing()) root.classList.add('lite', 'lite-start');
+else (function checkSpeed() {
+  if (document.hidden) {                 // background tabs don't draw frames; wait until it's shown
+    document.addEventListener('visibilitychange', checkSpeed, { once: true });
+    return;
+  }
+  const gaps = [];
+  let last = performance.now();
+  const end = last + 2200;
+  requestAnimationFrame(function frame(t) {
+    gaps.push(t - last); last = t;
+    if (t < end) return requestAnimationFrame(frame);
+    gaps.sort((a, b) => a - b);
+    if (gaps[gaps.length >> 1] > 22) root.classList.add('lite');   // the middle frame ignores one-off hiccups
+  });
+})();
+
 // One-screen layout: always start at the top
 history.scrollRestoration = 'manual';
 scrollTo(0, 0);
@@ -340,7 +373,7 @@ show(built.has(start) ? start : 'home');
   inner.insertBefore(dots, portrait);
   // the portrait slides in once; coming back to Home later just shows it
   portrait.addEventListener('animationend', e => {
-    if (e.animationName === 'portraitIn') document.body.classList.add('portrait-done');
+    if (e.animationName.startsWith('portraitIn')) document.body.classList.add('portrait-done');
   });
   const ghost = portrait.cloneNode(true);
   ghost.classList.add('p5-ghost');
@@ -349,7 +382,7 @@ show(built.has(start) ? start : 'home');
 
   const FILLS = ['red', 'paper', 'ink'];
   function shards() {
-    const n = Math.round(rnd(3, 5));
+    const n = root.classList.contains('lite') ? 2 : Math.round(rnd(3, 5));
     for (let i = 0; i < n; i++) {
       const s = document.createElement('div');
       s.className = `p5-shard star ${FILLS[i % FILLS.length]}`;
@@ -373,6 +406,7 @@ show(built.has(start) ? start : 'home');
   function hit() {
     if (!seen(stage)) return;
     clearTimeout(hitEnd);            // a new hit must not be cut short by the last one's cleanup
+    document.body.classList.add('portrait-done');   // a hit that lands mid slide-in finishes it, so it can't restart after
     stage.classList.remove('hit');
     void stage.offsetWidth;          // restart the CSS animations
     stage.classList.add('hit');

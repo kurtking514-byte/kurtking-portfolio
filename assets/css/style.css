@@ -956,6 +956,22 @@ a { color: inherit; text-decoration: none; }
 }
 .kk-shard.red { background: var(--red); }
 
+/* ---------- Lite mode: slow computers (the safety switch in main.js) ---------- */
+/* The impact keeps its punch and two plain stars; the dots and red ghost sit out,
+   and the photo viewer's ribbon fades in instead of being cut out frame by frame.
+   The opening entrances only go light when that's known from the start (lite-start):
+   switching them mid-way would replay them. */
+.lite .p5-dots, .lite .p5-ghost { display: none !important; }
+.lite .p5-shard b { filter: none; }
+.lite .lb-backdrop::before, .lite .lb-backdrop::after { animation: liteIn .2s both; }
+.lite-start .ready:not(.portrait-done) .portrait { animation-name: portraitInLite; }
+.lite-start .ready .slab { animation-name: liteIn; }
+@keyframes liteIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes portraitInLite {
+  from { opacity: 0; transform: translateX(-60%); }
+  to   { opacity: 1; transform: translateX(-48%); }
+}
+
 /* ---------- Photo viewer ---------- */
 .role.has-photos { cursor: pointer; }
 button.role-link { border: 0; cursor: pointer; }
