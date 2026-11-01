@@ -89,10 +89,17 @@ function show(id) {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
   // Replay this screen's entrance
+  document.querySelectorAll('.was-in').forEach(el => el.classList.replace('was-in', 'in'));
   document.body.classList.remove('ready');
   void document.body.offsetWidth;
   document.body.classList.add('ready');
 }
+
+// Once an entrance finishes, let go of it: its last frame would otherwise
+// hold the element still and block hover movement (arrows, ladder, cards)
+document.addEventListener('animationend', e => {
+  if (e.target.classList.contains('in')) e.target.classList.replace('in', 'was-in');
+});
 
 let toastTimer;
 function go(id) {
