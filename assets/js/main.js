@@ -93,9 +93,17 @@ function switchTheme() {
 document.getElementById('themeBtn').addEventListener('click', switchTheme);
 
 // ---------- Screens ----------
-const order = ['home', 'education', 'experience', 'projects', 'skills', 'contact'];
-const titles = { home: 'Home', education: 'Education', experience: 'Experience', projects: 'Projects', skills: 'Skills', contact: 'Contact' };
-const built = new Set([...document.querySelectorAll('.panel')].map(p => p.dataset.screen));
+// The main link shows only the screens assigned so far; /full (or ?full) shows them all.
+// To open another screen on the main link, add it to ASSIGNED.
+const ASSIGNED = ['home', 'education'];
+const FULL = /^\/full\/?$/.test(location.pathname) || /[?&]full\b/.test(location.search);
+const ALL = { home: 'Home', education: 'Education', experience: 'Experience', projects: 'Projects', skills: 'Skills', contact: 'Contact' };
+const order = Object.keys(ALL).filter(id => FULL || ASSIGNED.includes(id));
+const titles = Object.fromEntries(order.map(id => [id, ALL[id]]));
+document.querySelectorAll('.tab').forEach(t => {
+  if (!titles[t.getAttribute('href').slice(1)]) t.closest('li').remove();
+});
+const built = new Set([...document.querySelectorAll('.panel')].map(p => p.dataset.screen).filter(id => titles[id]));
 const jumps = document.getElementById('jumps');
 const arrowPts = '10,24 182,12 176,0 268,42 192,90 190,74 22,82 36,54';
 let current = null;
