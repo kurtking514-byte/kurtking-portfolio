@@ -54,9 +54,12 @@ function portraitSpot(page) {
   return { x, y: y - scrollY, h };
 }
 
+// page name from a url: "about.html", "/about" (Cloudflare drops .html) and "/" all work
+const fileOf = url => new URL(url, location.href).pathname.split('/').pop().replace(/\.html$/, '') || 'index';
+
 function pageOf(url) {
-  const name = new URL(url, location.href).pathname.split('/').pop();
-  return name === '' || name === 'index.html' ? 'home' : name === 'about.html' ? 'about' : null;
+  const name = fileOf(url);
+  return name === 'index' ? 'home' : name === 'about' ? 'about' : null;
 }
 
 // slide the nav underline from this page's tab to the next one, in time with the glide
@@ -76,7 +79,6 @@ function slideUnderline(dest, duration) {
   ], { duration, easing: 'cubic-bezier(.65, 0, .25, 1)', pseudoElement: '::after' });
 }
 
-const fileOf = url => new URL(url, location.href).pathname.split('/').pop() || 'index.html';
 let gliding = false;
 document.addEventListener('click', e => {
   const link = e.target.closest('a[href$=".html"]');
