@@ -1,388 +1,68 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kurt Magastino</title>
-<meta name="description" content="Kurt King D. Magastino: BS Computer Science student at the University of the Cordilleras. Full-stack, robotics and hardware projects.">
-<meta name="author" content="Kurt King D. Magastino">
-<meta name="theme-color" content="#101010">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Kurt Magastino">
-<meta property="og:description" content="BS Computer Science student. Full-stack, robotics and hardware projects.">
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<title>Kurt King D. Magastino | Computer Science Student</title>
+<meta name="description" content="Portfolio of Kurt King D. Magastino, Computer Science student at the University of the Cordilleras.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&family=M+PLUS+Rounded+1c:wght@800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Inter:wght@400;500;600&display=block" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script>
+  // set the saved theme before the page paints, so it doesn't flash
+  try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  // arriving from another page: the portrait glides in (main.js), so skip its entrance animation
+  try { if (sessionStorage.getItem('glide')) document.documentElement.classList.add('vt'); } catch (e) {}
+</script>
 </head>
-<body>
-<div class="screen" id="screen">
-  <div class="contours page" aria-hidden="true"></div>
-  <div class="bg-mark" aria-hidden="true">KK</div>
-
-  <header class="topbar">
-    <a class="logo" href="#home" aria-label="Kurt Magastino, home"><span class="rk r1">K</span><span class="rk r2">K</span></a>
-    <nav class="tabbar" aria-label="Sections">
-      <svg class="bar-shadow" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,10 100,2 98,90 2,100 3,56"/></svg>
-      <svg class="bar-body" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,10 100,2 98,90 2,100 3,56"/></svg>
-      <ul class="tabs">
-        <li><a class="tab" href="#home" aria-current="page"><span>Home</span></a></li>
-        <li><a class="tab" href="#education"><span>Education</span></a></li>
-        <li><a class="tab" href="#experience"><span>Experience</span></a></li>
-        <li><a class="tab" href="#projects"><span>Projects</span></a></li>
-        <li><a class="tab" href="#skills"><span>Skills</span></a></li>
-        <li><a class="tab" href="#contact"><span>Contact</span></a></li>
-      </ul>
+<body class="home">
+  <header class="site-header">
+    <a class="brand" href="index.html">K<span>K</span></a>
+    <nav id="nav" class="nav">
+      <a class="on" href="index.html" aria-current="page">Home</a>
+      <a href="about.html">About</a>
+      <a href="skills.html">Skills</a>
+      <a href="projects.html">Projects</a>
+      <a href="education.html">Education</a>
+      <a href="family.html">Family</a>
+      <a href="contact.html">Contact</a>
     </nav>
+    <div class="tools">
+      <button class="theme-btn" aria-label="Switch to dark mode" title="Switch theme">
+        <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1Z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3M4.6 4.6l2.1 2.1M17.3 17.3l2.1 2.1M4.6 19.4l2.1-2.1M17.3 6.7l2.1-2.1"/></svg>
+      </button>
+      <button class="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
+    </div>
   </header>
 
-  <main class="hero panel" data-screen="home">
-    <section class="stage" aria-label="Portrait">
-      <div class="stage-inner" id="stageInner">
-        <div class="back">
-          <div class="slab"></div>
-          <div class="shard a"><div class="contours on-red" aria-hidden="true"></div></div>
-          <div class="stripe"></div>
-        </div>
-        <div class="portrait">
-          <!-- one photo per theme: black shirt for dark, white shirt for light -->
-          <img class="for-dark" src="assets/images/portrait-dark.webp" alt="Kurt Magastino in a black suit and red tie">
-          <img class="for-light" src="assets/images/portrait-light.webp" alt="Kurt Magastino in a black suit, white shirt and red tie">
-        </div>
-        <div class="front">
-          <div class="shard b"></div>
-          <div class="shard c"></div>
-        </div>
+  <main class="poster">
+    <div class="disc" aria-hidden="true"></div>
+    <p class="first fade">Kurt King D.</p>
+    <h1 class="name back"><span class="sr">Kurt King D. </span>Magastino</h1>
+    <img class="portrait" src="assets/images/portrait.webp" alt="Portrait of Kurt Magastino in a black suit and red tie">
+    <div class="name front" aria-hidden="true">Magastino</div>
+
+    <div class="info fade">
+      <p class="role">Computer Science Student</p>
+      <p class="school">University of the Cordilleras · Baguio City</p>
+      <p class="tagline">Building clean, useful software, one project at a time.</p>
+      <div class="actions">
+        <a class="btn primary" href="projects.html">Explore my work <span class="arrow">→</span></a>
+        <a class="btn" href="resume/Kurt_Magastino_Resume.pdf" download>Download CV <span class="arrow">↓</span></a>
       </div>
-    </section>
-
-    <section class="intro">
-      <h1 class="name">
-        <span class="first in">Kurt King D.</span>
-        <span class="last">Magastino</span>
-      </h1>
-      <p class="tagline in"><span class="line">I am a<em class="word"><span class="word-ink"><strong>Full-stack developer</strong></span></em></span></p>
-      <p class="meta in"><span><b>BS Computer Science</b> · University of the Cordilleras</span></p>
-    </section>
-  </main>
-
-  <main class="edu panel" data-screen="education" hidden>
-    <h2 class="sec-title in"><span>Education</span></h2>
-
-    <div class="edu-body">
-      <div class="ladder" role="tablist" aria-label="Schools" aria-orientation="vertical">
-        <button class="rung in" role="tab" id="rung-uc" aria-selected="true" aria-controls="sch-uc" data-school="uc">
-          <svg class="frame-shadow" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,8 100,0 97,100 2,92"/></svg><svg class="frame-body" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,8 100,0 97,100 2,92"/></svg>
-          <b>College</b><span>2026 – Present</span>
-        </button>
-        <button class="rung in" role="tab" id="rung-shs" aria-selected="false" aria-controls="sch-shs" data-school="shs" tabindex="-1">
-          <svg class="frame-shadow" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,8 100,0 97,100 2,92"/></svg><svg class="frame-body" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,8 100,0 97,100 2,92"/></svg>
-          <b>Senior High</b><span>2024 – 2026</span>
-        </button>
-        <button class="rung in" role="tab" id="rung-jhs" aria-selected="false" aria-controls="sch-jhs" data-school="jhs" tabindex="-1">
-          <svg class="frame-shadow" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,8 100,0 97,100 2,92"/></svg><svg class="frame-body" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,8 100,0 97,100 2,92"/></svg>
-          <b>Junior High</b><span>2020 – 2024</span>
-        </button>
-        <button class="rung in" role="tab" id="rung-elem" aria-selected="false" aria-controls="sch-elem" data-school="elem" tabindex="-1">
-          <svg class="frame-shadow" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,8 100,0 97,100 2,92"/></svg><svg class="frame-body" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,8 100,0 97,100 2,92"/></svg>
-          <b>Elementary</b><span>2014 – 2020</span>
-        </button>
-      </div>
-
-      <div class="school-view in">
-        <article class="school" id="sch-uc" role="tabpanel" aria-labelledby="rung-uc">
-          <svg class="frame-shadow" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,5 100,0 98,100 0,96"/></svg><svg class="frame-body" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,5 100,0 98,100 0,96"/></svg>
-          <figure class="school-photo"><img src="assets/images/edu-college.jpg" alt="Kurt in a white shirt and tie, the University of the Cordilleras logo behind him"></figure>
-          <div class="school-info">
-            <div class="school-head">
-              <img class="badge contain" src="assets/images/logo-uc.jpg" alt="University of the Cordilleras logo">
-              <div class="when"><b>2026 – Present</b><span>BS Computer Science</span></div>
-            </div>
-            <h3>University of the Cordilleras</h3>
-            <ul class="wins">
-            <li>Currently enrolled in BS Computer Science</li>
-            </ul>
-          </div>
-        </article>
-        <article class="school" id="sch-shs" role="tabpanel" aria-labelledby="rung-shs" hidden>
-          <svg class="frame-shadow" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,5 100,0 98,100 0,96"/></svg><svg class="frame-body" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,5 100,0 98,100 0,96"/></svg>
-          <figure class="school-photo"><img src="assets/images/edu-senior.jpg" alt="Kurt in his senior high graduation toga"></figure>
-          <div class="school-info">
-            <div class="school-head">
-              <img class="badge" src="assets/images/logo-mchs.jpg" alt="Maddela Comprehensive High School logo">
-              <div class="when"><b>2024 – 2026</b><span>Senior High · STEM Strand</span></div>
-            </div>
-            <h3>Maddela Comprehensive High School</h3>
-            <ul class="wins">
-            <li>Graduated with High Honors</li>
-            <li>Silver Medal in Science</li>
-            <li>Bronze Medal in Research</li>
-            </ul>
-            <ul class="comps" aria-label="Competitions">
-              <li><b>1st</b><span>RSTW 2025 · Line Trace <i>Team</i></span></li>
-              <li><b>1st ×2</b><span>Project R.I.S.E · Robotics &amp; Medical Robotics <i>Team</i></span></li>
-              <li><b>4th</b><span>National Robotics Competition 2025 · Line Trace <i>Team</i></span></li>
-            </ul>
-          </div>
-        </article>
-        <article class="school" id="sch-jhs" role="tabpanel" aria-labelledby="rung-jhs" hidden>
-          <svg class="frame-shadow" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,5 100,0 98,100 0,96"/></svg><svg class="frame-body" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,5 100,0 98,100 0,96"/></svg>
-          <figure class="school-photo"><img src="assets/images/edu-junior.jpg" alt="Kurt in his junior high completion photo"></figure>
-          <div class="school-info">
-            <div class="school-head">
-              <img class="badge" src="assets/images/logo-mchs.jpg" alt="Maddela Comprehensive High School logo">
-              <div class="when"><b>2020 – 2024</b><span>Junior High</span></div>
-            </div>
-            <h3>Maddela Comprehensive High School</h3>
-            <ul class="wins">
-            <li>Graduated with High Honors</li>
-            </ul>
-          </div>
-        </article>
-        <article class="school" id="sch-elem" role="tabpanel" aria-labelledby="rung-elem" hidden>
-          <svg class="frame-shadow" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,5 100,0 98,100 0,96"/></svg><svg class="frame-body" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,5 100,0 98,100 0,96"/></svg>
-          <figure class="school-photo"><img src="assets/images/edu-elementary.jpg" alt="Kurt in his elementary graduation cap and gown"></figure>
-          <div class="school-info">
-            <div class="school-head">
-              <img class="badge" src="assets/images/logo-mbcs.jpg" alt="Maddela Baptist Christian School logo">
-              <div class="when"><b>2014 – 2020</b><span>Elementary</span></div>
-            </div>
-            <h3>Maddela Baptist Christian School</h3>
-            <ul class="wins">
-            <li>Graduated with High Honors</li>
-            </ul>
-          </div>
-        </article>
-      </div>
+      <ul class="socials" aria-label="Social links">
+        <li><a href="https://github.com/kurtking514-byte" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.7 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
+        </a></li>
+        <li><a href="mailto:kurtmagastino514@gmail.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm1 2.3V17h16V7.3l-8 5.6-8-5.6ZM5.4 7l6.6 4.6L18.6 7H5.4Z"/></svg>
+        </a></li>
+      </ul>
     </div>
   </main>
 
-  <main class="exp panel" data-screen="experience" hidden>
-    <h2 class="sec-title in"><span>Experience</span></h2>
-
-    <div class="exp-body">
-      <article class="role in has-photos" data-gallery="shop">
-        <svg class="frame-shadow" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,5 100,0 98,100 0,96"/></svg><svg class="frame-body" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,5 100,0 98,100 0,96"/></svg>
-        <div class="role-head"><b>2024 – 2026</b><span>2 years</span></div>
-        <h3>Phone Shop Staff &amp; Repair Tech</h3>
-        <p class="place">Norman Cellphone Center and Accessories</p>
-        <ul class="wins">
-          <li>Repaired phone hardware, including screen, battery and charging port replacements</li>
-          <li>Resolved software issues, including system reinstalls and boot failures</li>
-          <li>Managed inventory of devices, parts and accessories</li>
-          <li>Provided sales support and customer service</li>
-        </ul>
-        <div class="role-links">
-          <a class="role-link" href="#projects" data-pick="rung-norman">I later built this shop's system</a>
-          <button class="role-link" type="button" data-gallery="shop">Documentation</button>
-        </div>
-      </article>
-
-      <article class="role step in has-photos" data-gallery="spes">
-        <svg class="frame-shadow" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,4 99,0 100,94 2,100"/></svg><svg class="frame-body" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,4 99,0 100,94 2,100"/></svg>
-        <div class="role-head"><b>May – July 2026</b><span>SPES</span></div>
-        <h3>Office Admin Assistant</h3>
-        <p class="place">Barangay Poblacion Sur</p>
-        <ul class="wins">
-          <li>Prepared and filed barangay documents and records</li>
-          <li>Processed and issued barangay certifications</li>
-          <li>Encoded records and typed letters and reports</li>
-          <li>Assisted residents at the office and during barangay events</li>
-        </ul>
-        <button class="role-link" type="button" data-gallery="spes">Documentation</button>
-      </article>
-    </div>
-  </main>
-
-  <main class="proj-screen panel" data-screen="projects" hidden>
-    <h2 class="sec-title in"><span>Projects</span></h2>
-
-    <div class="edu-body">
-      <div>
-        <div class="ladder" role="tablist" aria-label="Projects" aria-orientation="vertical">
-        <button class="rung in" role="tab" id="rung-norman" aria-selected="true" aria-controls="proj-norman">
-          <svg class="frame-shadow" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,8 100,0 97,100 2,92"/></svg><svg class="frame-body" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,8 100,0 97,100 2,92"/></svg>
-          <b>Norman Cellphone Center</b><span>Full-stack · 2026</span>
-        </button>
-        <button class="rung in" role="tab" id="rung-robert0" aria-selected="false" aria-controls="proj-robert0" tabindex="-1">
-          <svg class="frame-shadow" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,8 100,0 97,100 2,92"/></svg><svg class="frame-body" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,8 100,0 97,100 2,92"/></svg>
-          <b>ROBERT0</b><span>Hardware · AI · 2025</span>
-        </button>
-        <button class="rung in" role="tab" id="rung-poseidon" aria-selected="false" aria-controls="proj-poseidon" tabindex="-1">
-          <svg class="frame-shadow" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,8 100,0 97,100 2,92"/></svg><svg class="frame-body" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,8 100,0 97,100 2,92"/></svg>
-          <b>POSEIDON</b><span>Hardware · 2026</span>
-        </button>
-        </div>
-        <p class="also in"><b>Also built</b><span><button class="also-link" type="button" data-gallery="balong">B.A.L.O.N.G ▶</button> · <button class="also-link" type="button" data-gallery="refiner">Prompt Refiner</button> · Local Agent Forge</span></p>
-      </div>
-
-      <div class="school-view in">
-        <article class="school proj" id="proj-norman" role="tabpanel" aria-labelledby="rung-norman">
-          <svg class="frame-shadow" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,5 100,0 98,100 0,96"/></svg><svg class="frame-body" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,5 100,0 98,100 0,96"/></svg>
-          <div class="proj-media">
-            <figure class="school-photo"><img src="assets/images/proj-norman-6.jpg" alt="Norman Cellphone Center Facebook page"></figure>
-            <button class="role-link" type="button" data-gallery="norman">Documentation</button>
-          </div>
-          <div class="school-info">
-            <div class="school-head">
-              <div class="when"><b>July 2026 – Present</b><span>Full-stack · AI</span></div>
-              <span class="status">In development</span>
-            </div>
-            <h3>Norman Cellphone Center</h3>
-            <p class="desc">A Messenger storefront and admin dashboard for the phone shop I worked at. Customers browse products, reserve items and request repairs through an AI chatbot; staff manage everything from a web dashboard.</p>
-            <ul class="wins">
-            <li>Messenger bot and staff dashboard are working</li>
-            <li>Next: polishing the admin design and testing with a large inventory</li>
-            </ul>
-            <ul class="stack" aria-label="Built with"><li>FastAPI</li><li>React</li><li>SQLite</li><li>DeepSeek</li><li>Gemini</li><li>JWT login</li></ul>
-          </div>
-        </article>
-        <article class="school proj" id="proj-robert0" role="tabpanel" aria-labelledby="rung-robert0" hidden>
-          <svg class="frame-shadow" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,5 100,0 98,100 0,96"/></svg><svg class="frame-body" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,5 100,0 98,100 0,96"/></svg>
-          <div class="proj-media">
-            <figure class="school-photo"><img src="assets/images/proj-robert0-1.jpg" alt="ROBERT0 robot with its speakers and microphone"></figure>
-            <button class="role-link" type="button" data-gallery="robert0">Documentation</button>
-          </div>
-          <div class="school-info">
-            <div class="school-head">
-              <div class="when"><b>November 2025</b><span>Hardware · AI</span></div>
-              <span class="status">Tested</span>
-            </div>
-            <h3>ROBERT0</h3>
-            <p class="desc">An emotion-responsive robot. You tell it how you feel; it recognizes the emotion, moves its head to match and plays music that fits the mood.</p>
-            <ul class="wins">
-            <li>90% emotion detection across 40 trials</li>
-            <li>92% servo movement reliability</li>
-            <li>Built for under ₱5,000</li>
-            </ul>
-            <ul class="stack" aria-label="Built with"><li>Raspberry Pi 3B+</li><li>Python</li><li>Google Speech-to-Text</li><li>Servo motor</li><li>OLED display</li></ul>
-          </div>
-        </article>
-        <article class="school proj" id="proj-poseidon" role="tabpanel" aria-labelledby="rung-poseidon" hidden>
-          <svg class="frame-shadow" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,5 100,0 98,100 0,96"/></svg><svg class="frame-body" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,5 100,0 98,100 0,96"/></svg>
-          <div class="proj-media">
-            <figure class="school-photo"><img src="assets/images/proj-poseidon-1.jpg" alt="POSEIDON water-powered flashlight"></figure>
-            <button class="role-link" type="button" data-gallery="poseidon">Documentation</button>
-          </div>
-          <div class="school-info">
-            <div class="school-head">
-              <div class="when"><b>March 2026</b><span>Hardware · Energy</span></div>
-              <span class="status">Finished & working</span>
-            </div>
-            <h3>POSEIDON</h3>
-            <p class="desc">A portable flashlight powered by flowing water. Two small turbines generate electricity that charges a battery for off-grid and emergency lighting. I built the physical system for our 6-person research team.</p>
-            <ul class="wins">
-            <li>507.8 mW average output across 20 trials</li>
-            <li>About 27% overall system efficiency</li>
-            </ul>
-            <ul class="stack" aria-label="Built with"><li>Pico-hydro turbines</li><li>LM2596 buck converter</li><li>Li-ion battery</li></ul>
-          </div>
-        </article>
-      </div>
-    </div>
-  </main>
-
-  <main class="skills panel" data-screen="skills" hidden>
-    <h2 class="sec-title in"><span>Skills</span></h2>
-
-    <div class="skill-grid">
-      <section class="skill in">
-        <svg class="frame-shadow" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,6 100,0 98,100 0,95"/></svg><svg class="frame-body" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,6 100,0 98,100 0,95"/></svg>
-        <h3>Languages</h3>
-        <ul class="stack"><li>Python</li><li>C / C++</li><li>JavaScript</li><li>TypeScript</li><li>Rust</li></ul>
-      </section>
-      <section class="skill in">
-        <svg class="frame-shadow" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,3 99,0 100,96 2,100"/></svg><svg class="frame-body" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,3 99,0 100,96 2,100"/></svg>
-        <h3>Web &amp; Apps</h3>
-        <ul class="stack"><li>React</li><li>Vite</li><li>FastAPI</li><li>SQLite</li><li>Tauri</li><li>CustomTkinter</li></ul>
-      </section>
-      <section class="skill in">
-        <svg class="frame-shadow" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,6 100,0 98,100 0,95"/></svg><svg class="frame-body" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,6 100,0 98,100 0,95"/></svg>
-        <h3>AI</h3>
-        <ul class="stack"><li>Gemini API</li><li>DeepSeek API</li><li>Groq API</li><li>Ollama (local models)</li><li>Multi-agent pipelines</li><li>Prompt design</li></ul>
-      </section>
-      <section class="skill in">
-        <svg class="frame-shadow" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,3 99,0 100,96 2,100"/></svg><svg class="frame-body" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,3 99,0 100,96 2,100"/></svg>
-        <h3>Hardware</h3>
-        <ul class="stack"><li>Raspberry Pi</li><li>Servo motors</li><li>Sensors</li><li>Circuit assembly</li><li>Power regulation</li><li>Phone repair</li></ul>
-      </section>
-      <section class="skill in">
-        <svg class="frame-shadow" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,6 100,0 98,100 0,95"/></svg><svg class="frame-body" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,6 100,0 98,100 0,95"/></svg>
-        <h3>Tools</h3>
-        <ul class="stack"><li>GitHub</li><li>GitHub Copilot</li><li>Antigravity IDE</li><li>AI-assisted development</li></ul>
-      </section>
-      <section class="skill in">
-        <svg class="frame-shadow" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,3 99,0 100,96 2,100"/></svg><svg class="frame-body" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,3 99,0 100,96 2,100"/></svg>
-        <h3>Work</h3>
-        <ul class="stack"><li>Documentation &amp; records</li><li>Customer service</li><li>Inventory management</li></ul>
-      </section>
-    </div>
-  </main>
-
-  <main class="contact panel" data-screen="contact" hidden>
-    <h2 class="sec-title in"><span>Contact</span></h2>
-    <p class="contact-lead in">Got a question about my work? Send me a message.</p>
-
-    <div class="contact-list">
-      <div class="contact-card in">
-        <svg class="frame-shadow" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,8 100,0 98,100 0,92"/></svg><svg class="frame-body" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,8 100,0 98,100 0,92"/></svg>
-        <a class="contact-link" href="mailto:kurtmagastino514@gmail.com">
-          <small>Email</small>
-          <b>kurtmagastino514@gmail.com</b>
-        </a>
-        <button class="role-link copy-btn" type="button" data-copy="kurtmagastino514@gmail.com">Copy</button>
-      </div>
-      <div class="contact-card in">
-        <svg class="frame-shadow" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,4 99,0 100,94 2,100"/></svg><svg class="frame-body" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,4 99,0 100,94 2,100"/></svg>
-        <a class="contact-link" href="https://github.com/kurtking514-byte" target="_blank" rel="noopener">
-          <small>GitHub</small>
-          <b>github.com/kurtking514-byte</b>
-        </a>
-        <a class="role-link" href="https://github.com/kurtking514-byte" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">Open ↗</a>
-      </div>
-      <a class="role-link resume-link in" href="resume/Kurt_Magastino_Resume.pdf" download>Download resume (PDF)</a>
-    </div>
-  </main>
-
-  <footer class="foot">
-    <div class="foot-left">
-      <button class="theme-btn" id="themeBtn" aria-label="Switch between dark and light">
-        <svg viewBox="0 0 200 60" aria-hidden="true">
-          <polygon class="shadow" points="6,14 194,6 186,50 14,58 22,36" transform="translate(6 5)"/>
-          <polygon class="body" points="6,14 194,6 186,50 14,58 22,36"/>
-        </svg>
-        <span class="track" aria-hidden="true">
-          <span class="knob"></span>
-          <span class="opt dark">Dark</span>
-          <span class="opt light">Light</span>
-        </span>
-      </button>
-    </div>
-    <!-- Prev / Next arrows for the current screen are added by the script -->
-    <div class="jumps" id="jumps"></div>
-  </footer>
-</div>
-
-<div class="wipe intro" id="wipe" aria-hidden="true"><i></i><i></i></div>
-<div class="toast" id="toast" role="status"></div>
-
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lbTitle" hidden>
-  <div class="lb-backdrop" data-close></div>
-  <div class="lb-top">
-    <h2 class="lb-title" id="lbTitle"></h2>
-    <button class="lb-close" type="button" data-close aria-label="Close photos">Close ✕</button>
-  </div>
-  <figure class="lb-stage">
-    <img id="lbImg" alt="">
-    <video id="lbVid" controls playsinline preload="metadata" hidden></video>
-    <figcaption id="lbCap"></figcaption>
-  </figure>
-  <button class="lb-nav prev" type="button" aria-label="Previous photo">‹</button>
-  <button class="lb-nav next" type="button" aria-label="Next photo">›</button>
-  <div class="lb-thumbs" id="lbThumbs"></div>
-</div>
-
-<script src="assets/js/main.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About | Kurt King D. Magastino</title>
+<meta name="description" content="About Kurt King D. Magastino, Computer Science student at the University of the Cordilleras.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Inter:wght@400;500;600&display=block" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script>
+  // set the saved theme before the page paints, so it doesn't flash
+  try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  // arriving from another page: the portrait glides in (main.js), so skip its entrance animation
+  try { if (sessionStorage.getItem('glide')) document.documentElement.classList.add('vt'); } catch (e) {}
+</script>
+</head>
+<body class="about">
+  <header class="site-header">
+    <a class="brand" href="index.html">K<span>K</span></a>
+    <nav id="nav" class="nav">
+      <a href="index.html">Home</a>
+      <a class="on" href="about.html" aria-current="page">About</a>
+      <a href="skills.html">Skills</a>
+      <a href="projects.html">Projects</a>
+      <a href="education.html">Education</a>
+      <a href="family.html">Family</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="tools">
+      <button class="theme-btn" aria-label="Switch to dark mode" title="Switch theme">
+        <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1Z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3M4.6 4.6l2.1 2.1M17.3 17.3l2.1 2.1M4.6 19.4l2.1-2.1M17.3 6.7l2.1-2.1"/></svg>
+      </button>
+      <button class="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
+    </div>
+  </header>
+
+  <main class="about-page">
+    <div class="arch" aria-hidden="true"></div>
+    <img class="about-portrait" src="assets/images/portrait.webp" alt="Kurt Magastino in a black suit and red tie">
+
+    <div class="about-text">
+      <h1 class="page-title pull" style="--i:0">About <span class="outline">me</span></h1>
+      <p class="lead pull" style="--i:1">Hi, I'm Kurt King D. Magastino, a Computer Science student at the University of the Cordilleras, and I like building where hardware meets software.</p>
+      <p class="pull" style="--i:2">I've built a Messenger storefront and admin dashboard for a phone shop, an emotion-responsive robot, and a water-powered flashlight. Before college, I spent two years repairing phones and helping customers, and I also did office work at a barangay hall.</p>
+      <p class="pull" style="--i:3">Right now I'm growing as a web and AI developer, and I use AI as one of my main tools for building.</p>
+
+      <dl class="facts pull" style="--i:4">
+        <div><dt>From</dt><dd>Quirino, Philippines</dd></div>
+        <div><dt>Studying</dt><dd>BS Computer Science, University of the Cordilleras</dd></div>
+        <div><dt>Email</dt><dd><a href="mailto:kurtmagastino514@gmail.com">kurtmagastino514@gmail.com</a></dd></div>
+        <div><dt>GitHub</dt><dd><a href="https://github.com/kurtking514-byte" target="_blank" rel="noopener">github.com/kurtking514-byte</a></dd></div>
+      </dl>
+
+      <section class="do pull" style="--i:5" aria-labelledby="do-title">
+        <h2 id="do-title" class="label">What I do</h2>
+        <div class="do-grid">
+          <article><h3>Web &amp; apps</h3><p>Websites, dashboards and desktop apps, from the database to the screen.</p></article>
+          <article><h3>AI tools</h3><p>Chatbots and AI pipelines using cloud APIs and local models.</p></article>
+          <article><h3>Hardware</h3><p>Robots, sensors and circuits, plus hands-on phone repair.</p></article>
+        </div>
+      </section>
+
+      <div class="actions pull" style="--i:6">
+        <a class="btn primary" href="resume/Kurt_Magastino_Resume.pdf" download>Download CV <span class="arrow">↓</span></a>
+        <a class="btn" href="mailto:kurtmagastino514@gmail.com">Email me <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
