@@ -86,6 +86,20 @@ function slideUnderline(dest, duration) {
   ], { duration, easing: 'cubic-bezier(.65, 0, .25, 1)', pseudoElement: '::after' });
 }
 
+// the address the live site really uses: Cloudflare redirects "about.html" to "/about"
+// (and "index.html" to "/"), so going straight there skips a slow extra round trip
+const isLocal = ['localhost', '127.0.0.1', ''].includes(location.hostname);
+const realUrl = url => isLocal ? url : url.replace(/index\.html$/, '').replace(/\.html$/, '');
+
+// fetch the other page ahead of time, so the switch at the end of the glide is instant
+if (portrait) {
+  const other = new URL(pageOf(location.href) === 'home' ? 'about.html' : 'index.html', location.href).href;
+  const hint = document.createElement('link');
+  hint.rel = 'prefetch';
+  hint.href = realUrl(other);
+  document.head.append(hint);
+}
+
 let gliding = false;
 document.addEventListener('click', e => {
   const link = e.target.closest('a[href$=".html"]');
@@ -119,7 +133,7 @@ document.addEventListener('click', e => {
   ], { duration, easing: 'cubic-bezier(.65, 0, .25, 1)', fill: 'forwards' });
   glide.onfinish = () => {
     try { sessionStorage.setItem('glide', '1'); } catch (err) {}
-    location.href = link.href;
+    location.href = realUrl(link.href);
   };
 });
 

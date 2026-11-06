@@ -18,6 +18,10 @@
   color-scheme: dark;
 }
 
+/* Edge/Chrome: blend old and new page when switching, instead of a blank or frozen frame */
+@view-transition { navigation: auto; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: .2s; }
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { min-height: 100%; }
 /* always keep room for the scrollbar, so the header doesn't shift sideways between pages that scroll and pages that don't */
