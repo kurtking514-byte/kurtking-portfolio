@@ -10,6 +10,15 @@ if (menuBtn && nav) {
   });
 }
 
+// age on the About page, worked out from the birthday so it stays right every year
+const ageEl = document.querySelector('[data-born]');
+if (ageEl) {
+  const born = new Date(ageEl.dataset.born + 'T00:00'), now = new Date();
+  let age = now.getFullYear() - born.getFullYear();
+  if (now < new Date(now.getFullYear(), born.getMonth(), born.getDate())) age--;
+  ageEl.textContent = age;
+}
+
 // light / dark switch (remembered between visits)
 const themeBtn = document.querySelector('.theme-btn');
 const root = document.documentElement;
@@ -46,7 +55,7 @@ function portraitSpot(page) {
   let h, x, y;
   if (page === 'about') {
     if (stacked) { h = Math.min(H * .58, 560); x = (W - h * RATIO) / 2; y = 96; }
-    else { h = Math.min(H * .88, W * .54); x = pad; y = H - h; }
+    else { h = Math.min(H * .88, W * .54, (W - 600 - 2 * pad - W * .045) / RATIO); x = pad; y = H - h; }
   } else {
     if (stacked) { h = Math.min(H * .6, 640); x = (W - h * RATIO) / 2; y = 96; }
     else { h = H * .92; x = W * .66 - h * RATIO / 2; y = H - h; }

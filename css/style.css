@@ -1,10 +1,9 @@
 :root {
   --bg: #ece6d8;      /* cream */
   --ink: #1b1c19;     /* olive black */
-  --muted: #6d6f63;
+  --muted: #4f5147;   /* dark enough to read easily */
   --accent: #97a185;  /* sage: the disc behind the portrait */
   --sage: #6f7b5f;    /* small sage details */
-  --outline: #ece6d8; /* name outline over the photo: always light so it shows on dark hair */
   --hover: #3a3d35;
   --on-accent: #fff;
   --display: 'Archivo', system-ui, sans-serif;
@@ -16,12 +15,12 @@
 /* dark theme: follows the device unless the visitor picked one */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #1b1c19; --ink: #ece3d0; --muted: #9c9a8a; --accent: #66715a; --sage: #9aa685; --hover: #c9c1ae; --outline: #ece3d0;
+    --bg: #1b1c19; --ink: #ece3d0; --muted: #b9b6a5; --accent: #66715a; --sage: #9aa685; --hover: #c9c1ae;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #1b1c19; --ink: #ece3d0; --muted: #9c9a8a; --accent: #66715a; --sage: #9aa685; --hover: #c9c1ae; --outline: #ece3d0;
+  --bg: #1b1c19; --ink: #ece3d0; --muted: #b9b6a5; --accent: #66715a; --sage: #9aa685; --hover: #c9c1ae;
   color-scheme: dark;
 }
 
@@ -68,46 +67,8 @@ ul { list-style: none; }
 }
 
 /* ---------- home poster ---------- */
-/* sizes below use cqw/cqh (the poster's own width/height), so the name and
-   the info block always fit together, on wide-short and tall screens alike */
-.poster {
-  position: relative; height: 100vh; height: 100svh; overflow: hidden;
-  container-type: size;
-  /* first name sits under the header; the surname starts under it. On short
-     windows the surname also shrinks so the info block below still fits */
-  --first-size: clamp(16px, min(2.4cqw, 4.4cqh), 38px);
-  --name-top: max(calc(13cqh + 30px), calc(96px + var(--first-size)));
-  --info-h: calc(290px + clamp(0px, (1150px - 100cqw) * .25, 45px));   /* rough height of .info; taller when its buttons wrap */
-  --name-size: min(23cqw, 34cqh, (100cqh - var(--name-top) - var(--info-h) - 7cqh) / .8);
-  --name-bottom: calc(var(--name-top) + var(--name-size) * .8);
-  /* portrait box: height, top edge, horizontal center (used to find the face) */
-  --ph: 92cqh;
-  --pt: 8cqh;
-  --pcx: 66%;
-}
-
-/* giant surname: solid copy behind the portrait, outline copy in front */
-.name {
-  position: absolute; left: 0; right: 0; top: var(--name-top); text-align: center; white-space: nowrap;
-  font-family: var(--display); font-weight: 900; font-stretch: 62%;
-  font-size: var(--name-size); line-height: .8; letter-spacing: -.01em; text-transform: uppercase;
-}
-.name.back { z-index: 1; }
-.name.front {
-  z-index: 3; color: transparent; -webkit-text-stroke: 1.5px var(--outline); pointer-events: none;
-  /* cut a soft hole where the face is, so the outline never crosses it.
-     The hole covers eyes to chin and leaves the letters' top bar on the forehead. */
-  --face: radial-gradient(
-    ellipse calc(var(--ph) * .11) calc(var(--ph) * .115)
-    at calc(var(--pcx) + var(--ph) * .035) calc(var(--pt) + var(--ph) * .245 - var(--name-top)),
-    transparent 72%, #000 100%);
-  -webkit-mask-image: var(--face);
-  mask-image: var(--face);
-}
-.first {
-  position: absolute; z-index: 4; left: var(--pad); bottom: calc(100cqh - var(--name-top) + 10px);
-  font-family: var(--display); font-weight: 800; font-size: var(--first-size); line-height: 1; text-transform: uppercase;
-}
+/* name and info on the left, portrait on the right */
+.poster { position: relative; height: 100vh; height: 100svh; overflow: hidden; container-type: size; }
 
 /* portrait sits right of center so the info block on the left gets the space */
 .portrait { position: absolute; z-index: 2; left: 66%; bottom: 0; height: 92%; transform: translateX(-50%); }
@@ -117,11 +78,20 @@ ul { list-style: none; }
 }
 
 /* info block, left, always starting just under the giant name */
-.info { position: absolute; z-index: 4; left: var(--pad); top: calc(var(--name-bottom) + 4cqh); width: min(460px, 36cqw); }
+.info {
+  position: absolute; z-index: 4; left: var(--pad); top: 80px; bottom: 4cqh;
+  /* stop 24px before the portrait (its left edge is 66cqw minus half its width) */
+  width: min(540px, 42cqw, 66cqw - 32.3cqh - var(--pad) - 24px);
+  display: flex; flex-direction: column; justify-content: center;
+}
+.hero-name {
+  font-family: var(--display); font-weight: 800; font-size: clamp(34px, min(5cqw, 8.5cqh), 76px);
+  line-height: 1.02; letter-spacing: -.015em;
+}
 .info::before { content: ""; display: block; width: 48px; height: 4px; background: var(--sage); margin-bottom: clamp(10px, 2.2cqh, 18px); }
-.role { font-family: var(--display); font-weight: 800; font-size: clamp(22px, 2.5cqw, 40px); text-transform: uppercase; line-height: 1.02; }
-.school { color: var(--muted); font-size: 15px; margin-top: clamp(4px, 1cqh, 8px); }
-.tagline { font-size: 16px; margin-top: clamp(8px, 1.8cqh, 16px); max-width: 36ch; }
+.role { font-family: var(--display); font-weight: 700; font-size: clamp(15px, min(1.5cqw, 2.6cqh), 22px); letter-spacing: .08em; text-transform: uppercase; color: var(--sage); margin-top: clamp(8px, 1.6cqh, 14px); }
+.school { color: var(--muted); font-size: 16px; margin-top: clamp(4px, 1cqh, 8px); }
+.tagline { font-size: 18px; margin-top: clamp(8px, 1.8cqh, 16px); max-width: 36ch; }
 .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: clamp(12px, 2.8cqh, 24px); }
 .info .btn { padding-block: clamp(10px, 1.8cqh, 15px); }
 
@@ -144,11 +114,9 @@ ul { list-style: none; }
 .btn:hover .arrow { transform: translateX(4px); }
 
 /* entrance */
-.name { animation: up .6s cubic-bezier(.2, .8, .2, 1) both; }
 .portrait { animation: stand .7s cubic-bezier(.2, .8, .2, 1) both .05s; }
 .disc { animation: pop .6s cubic-bezier(.2, .8, .2, 1) both .15s; }
 .fade { animation: fade .5s ease both .3s; }
-@keyframes up { from { opacity: 0; transform: translateY(12%); } }
 @keyframes stand { from { opacity: 0; transform: translate(-50%, 8%); } }
 @keyframes stand-m { from { opacity: 0; transform: translateY(8%); } }
 @keyframes pop { from { transform: translateX(-50%) scale(0); } }
@@ -160,7 +128,6 @@ ul { list-style: none; }
   font-family: var(--display); font-weight: 900; font-stretch: 62%; text-transform: uppercase;
   font-size: clamp(72px, 13vw, 200px); line-height: .82; letter-spacing: -.01em; margin-bottom: clamp(32px, 5vw, 64px);
 }
-.page-title .outline { color: transparent; -webkit-text-stroke: 2px var(--ink); }
 .label { font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
 
 /* about: one screen, no scroll. The same portrait as home stands on the left
@@ -169,7 +136,8 @@ ul { list-style: none; }
 .about-page {
   position: relative; height: 100vh; height: 100svh; overflow: hidden;
   container-type: size;
-  --ph: min(88cqh, 54cqw);                 /* portrait height */
+  /* portrait height; on narrow screens it shrinks so the text keeps at least 600px */
+  --ph: min(88cqh, 54cqw, (100cqw - 600px - 2 * var(--pad) - 4.5cqw) / .703);
   --pw: calc(var(--ph) * .703);            /* portrait width (image is 1054x1500) */
 }
 .about-portrait {
@@ -185,34 +153,31 @@ ul { list-style: none; }
 
 .about-text {
   position: absolute; left: calc(var(--pad) + var(--pw) + 4.5cqw); right: var(--pad); top: 80px; bottom: 2.5cqh;
-  max-width: 700px; display: flex; flex-direction: column; justify-content: center;
+  max-width: 760px; display: flex; flex-direction: column; justify-content: center;
 }
-.about-page .page-title { font-size: clamp(30px, min(max(7.5cqw, 44px), 11cqh), 130px); margin-bottom: 2.2cqh; }
-.about-text p { color: var(--muted); font-size: clamp(11px, min(max(1.15cqw, 13px), 1.95cqh), 16px); line-height: 1.5; margin-bottom: 1.1cqh; }
-.about-text .lead { color: var(--ink); font-size: clamp(12px, min(max(1.55cqw, 15px), 2.55cqh), 22px); line-height: 1.4; margin-bottom: 1.6cqh; }
+.about-page .page-title { font-size: clamp(30px, min(max(6cqw, 40px), 7cqh), 104px); margin-bottom: 2cqh; }
+.about-text p { color: var(--muted); font-size: clamp(15px, 2.2cqh, 17px); line-height: 1.5; margin-bottom: 1.1cqh; }
+.about-text .lead { color: var(--ink); font-size: clamp(17px, 2.8cqh, 22px); line-height: 1.4; margin-bottom: 1.6cqh; }
 
-.facts { display: grid; grid-template-columns: 1fr 1fr; column-gap: 28px; margin-top: 1.6cqh; border-top: 1.5px solid var(--ink); }
-.facts div { padding: 1.1cqh 0; border-bottom: 1px solid color-mix(in srgb, var(--ink) 15%, transparent); min-width: 0; }
-.facts dt { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
-.facts dd { font-size: clamp(11px, min(max(1.15cqw, 13px), 1.95cqh), 16px); line-height: 1.35; overflow-wrap: anywhere; }
-.facts .wide { grid-column: 1 / -1; }
+.facts { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 24px; margin-top: 1.6cqh; border-top: 1.5px solid var(--ink); }
+.facts div { padding: .8cqh 0; border-bottom: 1px solid color-mix(in srgb, var(--ink) 15%, transparent); min-width: 0; }
+.facts dt { font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.facts dd { font-size: clamp(15px, 2.2cqh, 17px); line-height: 1.35; overflow-wrap: anywhere; }
+.facts .wide2 { grid-column: span 2; }
 .facts a { border-bottom: 1px solid var(--sage); }
 
 .do { margin-top: 2.6cqh; }
 .do-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 2cqw, 28px); margin-top: 1cqh; }
 .do-grid article { border-top: 3px solid var(--ink); padding-top: 1cqh; }
-.do-grid h3 { font-family: var(--display); font-weight: 800; font-size: clamp(12px, min(max(1.5cqw, 14px), 2.3cqh), 21px); text-transform: uppercase; line-height: 1.05; }
-.about-text .do-grid p { font-size: clamp(11px, min(max(1.05cqw, 12px), 1.8cqh), 14px); line-height: 1.4; margin: 4px 0 0; }
-.about-text .actions { margin-top: 3cqh; }
-.about-text .btn { padding-block: clamp(8px, 1.8cqh, 15px); }
+.do-grid h3 { font-family: var(--display); font-weight: 800; font-size: clamp(15px, 2.4cqh, 20px); text-transform: uppercase; line-height: 1.05; }
+.about-text .do-grid p { font-size: clamp(14px, 2cqh, 16px); line-height: 1.4; margin: 4px 0 0; }
 
-/* narrow and short windows: the text column is thin, so tighten a bit more */
-@container (max-width: 1100px) and (max-height: 700px) {
-  .about-page .page-title { font-size: max(30px, 9.5cqh); }
-  .about-text .lead { font-size: max(12px, 2.3cqh); }
-  .about-text p:not(.lead), .facts dd { font-size: max(11px, 1.8cqh); }
-  .do { margin-top: 2cqh; }
-  .about-text .actions { margin-top: 2.2cqh; }
+/* small windows (narrow and short): step the text down a little, never below 14px */
+@container (max-width: 1100px) and (max-height: 800px) {
+  .about-text p, .facts dd { font-size: 14px; }
+  .about-text .lead { font-size: 16px; }
+  .about-text .do-grid p { font-size: 14px; }
+  .do-grid h3 { font-size: 15px; }
 }
 
 /* the text "pulls out" from behind the portrait, one piece after another */
@@ -228,6 +193,7 @@ ul { list-style: none; }
   .about-text p, .facts dd { font-size: 16px; }
   .about-text .lead { font-size: 19px; }
   .facts, .do-grid { grid-template-columns: 1fr; }
+  .facts .wide2 { grid-column: auto; }
   .do-grid h3 { font-size: 20px; }
   .about-text .do-grid p { font-size: 14px; }
 }
@@ -239,7 +205,6 @@ ul { list-style: none; }
    entrance and start the rest right away. */
 html.vt .portrait, html.vt .about-portrait { animation: none; }
 html.vt .arch { animation-delay: 0s; animation-duration: .4s; }
-html.vt .name { animation-duration: .4s; }
 html.vt .disc { animation-delay: 0s; animation-duration: .4s; }
 html.vt .fade { animation-delay: .1s; animation-duration: .35s; }
 html.vt .pull { animation-duration: .35s; animation-delay: calc(var(--i) * .03s); }
@@ -263,10 +228,7 @@ html.vt .pull { animation-duration: .35s; animation-delay: calc(var(--i) * .03s)
 
   .poster {
     height: auto; min-height: 0; display: flex; flex-direction: column; container-type: normal;
-    --name-top: calc(76px + 9vw); --ph: min(60svh, 640px); --pt: 96px; --pcx: 50%;
   }
-  .name { font-size: 21vw; }
-  .first { top: 76px; bottom: auto; font-size: min(5.5vw, 26px); }
   /* align-self keeps the flex column from stretching the photo sideways */
   .portrait {
     position: relative; display: block; align-self: center; width: auto; left: auto; transform: none;
@@ -275,7 +237,9 @@ html.vt .pull { animation-duration: .35s; animation-delay: calc(var(--i) * .03s)
   .disc { bottom: auto; top: calc(96px + 60svh - 50vw); width: 100vw; height: 100vw; }
 
   .disc { left: 50%; }
-  .info { position: relative; left: auto; top: auto; width: auto; background: var(--bg); padding: 28px var(--pad) 36px; }
+  .info { position: relative; left: auto; top: auto; bottom: auto; width: auto; display: block; background: var(--bg); padding: 28px var(--pad) 36px; }
+  .hero-name { font-size: clamp(32px, 9vw, 52px); }
+  .role { font-size: 15px; }
   .actions { flex-direction: column; }
 }
 
