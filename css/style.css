@@ -12,13 +12,7 @@
   color-scheme: light;
 }
 
-/* dark theme: follows the device unless the visitor picked one */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #1b1c19; --ink: #ece3d0; --muted: #b9b6a5; --accent: #66715a; --sage: #9aa685; --hover: #c9c1ae;
-    color-scheme: dark;
-  }
-}
+/* dark theme: only when the visitor picks it; the site always opens light */
 :root[data-theme="dark"] {
   --bg: #1b1c19; --ink: #ece3d0; --muted: #b9b6a5; --accent: #66715a; --sage: #9aa685; --hover: #c9c1ae;
   color-scheme: dark;
@@ -61,10 +55,6 @@ ul { list-style: none; }
 .theme-btn .sun { display: none; }
 :root[data-theme="dark"] .theme-btn .sun { display: block; }
 :root[data-theme="dark"] .theme-btn .moon { display: none; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .theme-btn .sun { display: block; }
-  :root:not([data-theme="light"]) .theme-btn .moon { display: none; }
-}
 
 /* ---------- home poster ---------- */
 /* name and info on the left, portrait on the right */

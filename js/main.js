@@ -22,9 +22,7 @@ if (ageEl) {
 // light / dark switch (remembered between visits)
 const themeBtn = document.querySelector('.theme-btn');
 const root = document.documentElement;
-const isDark = () => root.dataset.theme
-  ? root.dataset.theme === 'dark'
-  : matchMedia('(prefers-color-scheme: dark)').matches;
+const isDark = () => root.dataset.theme === 'dark';   // light unless the visitor picked dark
 
 function labelThemeBtn() {
   themeBtn.setAttribute('aria-label', isDark() ? 'Switch to light mode' : 'Switch to dark mode');
