@@ -12,8 +12,6 @@
 <script>
   // set the saved theme before the page paints, so it doesn't flash
   try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
-  // arriving from another page: the portrait glides in (main.js), so skip its entrance animation
-  try { if (sessionStorage.getItem('glide')) document.documentElement.classList.add('vt'); } catch (e) {}
 </script>
 </head>
 <body class="about">
@@ -69,6 +67,6 @@
     </div>
   </main>
 
-  <script src="js/main.js?v=4ef241dc"></script>
+  <script src="js/main.js?v=5d589b95"></script>
 </body>
 </html>
