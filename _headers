@@ -1,0 +1,8 @@
+# CSS, JS and images are linked with ?v=<version>, so browsers can keep them.
+# Pages themselves are always re-checked, so new versions show up right away.
+/css/*
+  Cache-Control: public, max-age=31536000, immutable
+/js/*
+  Cache-Control: public, max-age=31536000, immutable
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable

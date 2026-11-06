@@ -66,6 +66,8 @@ ul { list-style: none; }
 
 /* portrait sits right of center so the info block on the left gets the space */
 .portrait { position: absolute; z-index: 2; left: 66%; bottom: 0; height: 92%; transform: translateX(-50%); }
+/* keep the photo on its own ready-drawn layer, so the glide starts without a hitch */
+.portrait, .about-portrait { will-change: transform, translate, scale; }
 .disc {
   position: absolute; z-index: 0; left: 66%; bottom: -30vh; width: 84vh; height: 84vh; border-radius: 50%;
   transform: translateX(-50%); background: var(--accent);
