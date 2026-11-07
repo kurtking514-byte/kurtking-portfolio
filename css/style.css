@@ -246,7 +246,7 @@ html.vt .pull { animation-duration: .35s; animation-delay: calc(var(--i) * .03s)
 }
 .soon > * { position: relative; z-index: 1; }
 .soon .label { color: var(--sage); }
-.soon .page-title { font-size: clamp(64px, min(17vw, 30vh), 280px); margin: 1.5vh 0 3vh; }
+.soon .page-title { font-size: clamp(44px, min(11.5vw, 30vh), 220px); margin: 1.5vh 0 3vh; }
 .soon-note { color: var(--muted); font-size: clamp(15px, 1.4vw, 19px); max-width: 40ch; }
 .soon .actions { margin-top: 4vh; }
 .soon-disc {
