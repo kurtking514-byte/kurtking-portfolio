@@ -33,9 +33,15 @@
   transition: transform .4s cubic-bezier(.2, .8, .2, 1);
 }
 .shot span { display: none; }
+/* tall photos and collages: show the whole photo, over a soft blurred copy of itself */
+.shot:has(img.fit)::before {
+  content: ""; position: absolute; inset: -24px;
+  background: inherit; background-size: cover; background-position: center; filter: blur(18px) brightness(.75);
+}
+.shot img.fit { position: relative; object-fit: contain; }
 .shots:hover .shot.on img { transform: scale(1.03); }
-/* small arrows (bottom corners) and dots (bottom middle) */
-.dots { position: absolute; left: 50%; bottom: 12px; translate: -50% 0; display: flex; gap: 5px; padding: 4px 6px; border-radius: 99px; background: #ece6d8; box-shadow: 0 1px 5px rgb(0 0 0 / .35); pointer-events: none; }
+/* small arrows (bottom corners) and dots (top right) */
+.dots { position: absolute; right: 8px; top: 8px; display: flex; gap: 5px; padding: 4px 6px; border-radius: 99px; background: #ece6d8; box-shadow: 0 1px 5px rgb(0 0 0 / .35); pointer-events: none; }
 .dots i { width: 6px; height: 6px; border-radius: 50%; background: #b9bfae; transition: background .3s; }
 .dots i.on { background: #6f7b5f; }
 .arrow-btn {
