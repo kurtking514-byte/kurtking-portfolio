@@ -1,6 +1,27 @@
-// Achievements: each award shows its main photo on the page.
-// Clicking it opens it big; Prev / Next / arrow keys go through that award's photos, Esc or Close goes back.
+// Achievements: each card slowly cycles through its photos (one every 4.5s, cards staggered so they don't all change at once).
+// Hovering a card pauses it. Clicking opens the photo big; Prev / Next / arrow keys go through that award's photos.
 const viewer = document.querySelector('.viewer');
+const STEP = 4500;
+
+document.querySelectorAll('.award').forEach((award, n) => {
+  const shots = [...award.querySelectorAll('.shot')];
+  if (shots.length < 2) return;
+  const box = award.querySelector('.shots');
+  const dots = document.createElement('div');
+  dots.className = 'dots';
+  dots.append(...shots.map((s, i) => { const d = document.createElement('i'); if (!i) d.className = 'on'; return d; }));
+  box.append(dots);
+  let at = 0, paused = false;
+  box.addEventListener('mouseenter', () => paused = true);
+  box.addEventListener('mouseleave', () => paused = false);
+  const go = () => {
+    if (paused || document.hidden || (viewer && viewer.open)) return;
+    shots[at].classList.remove('on'); dots.children[at].classList.remove('on');
+    at = (at + 1) % shots.length;
+    shots[at].classList.add('on'); dots.children[at].classList.add('on');
+  };
+  setTimeout(() => { go(); setInterval(go, STEP); }, 2500 + n * 550);
+});
 
 if (viewer) {
   const img = viewer.querySelector('.v-single img');

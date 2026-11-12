@@ -21,23 +21,27 @@
 }
 .award { position: relative; min-height: 0; display: grid; grid-template-rows: minmax(0, 1fr) auto auto auto; }
 
-/* the cover photo fills the top of the card; the rest open when clicked */
-.shots { min-height: 0; }
-.shot { display: none; }
-.shot.cover {
-  display: block; width: 100%; height: 100%; padding: 0; border: 0; background: none; cursor: zoom-in;
+/* each card is a slow slideshow of its photos, stacked and crossfading */
+.shots { position: relative; min-height: 0; border-radius: 3px; overflow: hidden; background: color-mix(in srgb, var(--ink) 8%, transparent); }
+.shot {
+  position: absolute; inset: 0; display: block; padding: 0; border: 0; background: none; cursor: zoom-in;
+  opacity: 0; pointer-events: none; transition: opacity .9s ease;
 }
-.shot.cover img {
-  display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 3px;
-  background: color-mix(in srgb, var(--ink) 8%, transparent);
-  transition: transform .25s cubic-bezier(.2, .8, .2, 1), box-shadow .25s;
+.shot.on { opacity: 1; pointer-events: auto; }
+.shot img {
+  display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%;
+  transition: transform .4s cubic-bezier(.2, .8, .2, 1);
 }
-.shot.cover span { display: none; }
-.shot.cover:hover img { transform: translateY(-3px); box-shadow: 0 8px 20px rgb(0 0 0 / .18); }
+.shot span { display: none; }
+.shots:hover .shot.on img { transform: scale(1.03); }
+/* small dots: how many photos, and which one is showing */
+.dots { position: absolute; right: 8px; bottom: 8px; display: flex; gap: 5px; padding: 4px 6px; border-radius: 99px; background: rgb(0 0 0 / .45); pointer-events: none; }
+.dots i { width: 6px; height: 6px; border-radius: 50%; background: rgb(255 255 255 / .5); transition: background .3s; }
+.dots i.on { background: #fff; }
 .shot:focus-visible { outline: 3px solid var(--sage); outline-offset: 3px; }
 
 .place {
-  position: absolute; top: 8px; left: 8px; pointer-events: none;
+  position: absolute; z-index: 1; top: 8px; left: 8px; pointer-events: none;
   display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
   width: clamp(40px, 6.5vh, 54px); height: clamp(40px, 6.5vh, 54px); border-radius: 50%;
   background: var(--accent); color: var(--ink); box-shadow: 0 2px 8px rgb(0 0 0 / .25);
@@ -116,8 +120,7 @@
   /* tablets and phones: 2 across, and the page may scroll */
   .ach { height: auto; padding-top: 96px; }
   .awards { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: none; }
-  .shot.cover { height: auto; }
-  .shot.cover img { height: auto; aspect-ratio: 4 / 3; }
+  .shots { aspect-ratio: 4 / 3; }
   .ach .page-title { font-size: 44px; }
 }
 @media (max-width: 560px) {
