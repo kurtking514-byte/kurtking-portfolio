@@ -45,13 +45,13 @@
 .dots i { width: 6px; height: 6px; border-radius: 50%; background: #b9bfae; transition: background .3s; }
 .dots i.on { background: #6f7b5f; }
 .arrow-btn {
-  position: absolute; z-index: 2; bottom: 6px; width: 28px; height: 28px; border-radius: 50%;
+  position: absolute; z-index: 2; bottom: 8px; width: 36px; height: 36px; border-radius: 50%;
   display: grid; place-items: center; padding: 0; cursor: pointer;
   border: 1.5px solid #1b1c19; background: #ece6d8; color: #1b1c19; box-shadow: 0 1px 5px rgb(0 0 0 / .3);
-  font: 700 15px/1 var(--body); transition: background .2s, color .2s;
+  font: 700 20px/1 var(--body); transition: background .2s, color .2s;
 }
-.arrow-btn.prev { left: 6px; }
-.arrow-btn.next { right: 6px; }
+.arrow-btn.prev { left: 8px; }
+.arrow-btn.next { right: 8px; }
 .arrow-btn:hover { background: #1b1c19; color: #ece6d8; }
 .arrow-btn:focus-visible { outline: 3px solid var(--sage); outline-offset: 2px; }
 .shot:focus-visible { outline: 3px solid var(--sage); outline-offset: 3px; }
