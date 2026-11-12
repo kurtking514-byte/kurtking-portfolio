@@ -34,10 +34,20 @@
 }
 .shot span { display: none; }
 .shots:hover .shot.on img { transform: scale(1.03); }
-/* small dots: how many photos, and which one is showing */
-.dots { position: absolute; right: 8px; bottom: 8px; display: flex; gap: 5px; padding: 4px 6px; border-radius: 99px; background: rgb(0 0 0 / .45); pointer-events: none; }
+/* small arrows (bottom corners) and dots (bottom middle) */
+.dots { position: absolute; left: 50%; bottom: 12px; translate: -50% 0; display: flex; gap: 5px; padding: 4px 6px; border-radius: 99px; background: rgb(0 0 0 / .45); pointer-events: none; }
 .dots i { width: 6px; height: 6px; border-radius: 50%; background: rgb(255 255 255 / .5); transition: background .3s; }
 .dots i.on { background: #fff; }
+.arrow-btn {
+  position: absolute; z-index: 2; bottom: 6px; width: 28px; height: 28px; border-radius: 50%;
+  display: grid; place-items: center; padding: 0; cursor: pointer;
+  border: 1.5px solid rgb(255 255 255 / .8); background: rgb(0 0 0 / .5); color: #fff;
+  font: 700 15px/1 var(--body); transition: background .2s, color .2s;
+}
+.arrow-btn.prev { left: 6px; }
+.arrow-btn.next { right: 6px; }
+.arrow-btn:hover { background: #fff; color: #1b1c19; }
+.arrow-btn:focus-visible { outline: 3px solid var(--sage); outline-offset: 2px; }
 .shot:focus-visible { outline: 3px solid var(--sage); outline-offset: 3px; }
 
 .place {

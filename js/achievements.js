@@ -1,5 +1,6 @@
 // Achievements: each card slowly cycles through its photos (one every 4.5s, cards staggered so they don't all change at once).
-// Hovering a card pauses it. Clicking opens the photo big; Prev / Next / arrow keys go through that award's photos.
+// The small arrows on a card step through its photos by hand. Hovering pauses it.
+// Clicking a photo opens it big; Prev / Next / arrow keys go through that award's photos.
 const viewer = document.querySelector('.viewer');
 const STEP = 4500;
 
@@ -10,17 +11,26 @@ document.querySelectorAll('.award').forEach((award, n) => {
   const dots = document.createElement('div');
   dots.className = 'dots';
   dots.append(...shots.map((s, i) => { const d = document.createElement('i'); if (!i) d.className = 'on'; return d; }));
-  box.append(dots);
-  let at = 0, paused = false;
+  const arrow = (cls, label, text, by) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'arrow-btn ' + cls; b.textContent = text;
+    b.setAttribute('aria-label', label);
+    b.addEventListener('click', () => { set(at + by); restart(); });
+    return b;
+  };
+  box.append(dots, arrow('prev', 'Previous photo', '‹', -1), arrow('next', 'Next photo', '›', 1));
+
+  let at = 0, paused = false, timer = null;
+  function set(i) {
+    shots[at].classList.remove('on'); dots.children[at].classList.remove('on');
+    at = (i + shots.length) % shots.length;
+    shots[at].classList.add('on'); dots.children[at].classList.add('on');
+  }
+  const tick = () => { if (!paused && !document.hidden && !(viewer && viewer.open)) set(at + 1); };
+  const restart = () => { clearInterval(timer); timer = setInterval(tick, STEP); };
   box.addEventListener('mouseenter', () => paused = true);
   box.addEventListener('mouseleave', () => paused = false);
-  const go = () => {
-    if (paused || document.hidden || (viewer && viewer.open)) return;
-    shots[at].classList.remove('on'); dots.children[at].classList.remove('on');
-    at = (at + 1) % shots.length;
-    shots[at].classList.add('on'); dots.children[at].classList.add('on');
-  };
-  setTimeout(() => { go(); setInterval(go, STEP); }, 2500 + n * 550);
+  setTimeout(() => { tick(); restart(); }, 2500 + n * 550);
 });
 
 if (viewer) {
