@@ -1,11 +1,12 @@
-// Achievements: every photo is already on the page.
-// Clicking one opens it big; Prev / Next / arrow keys go through that award's photos, Esc or Close goes back.
+// Achievements: each award shows its main photo on the page.
+// Clicking it opens it big; Prev / Next / arrow keys go through that award's photos, Esc or Close goes back.
 const viewer = document.querySelector('.viewer');
 
 if (viewer) {
   const img = viewer.querySelector('.v-single img');
   const cap = viewer.querySelector('.v-cap');
   const title = viewer.querySelector('.v-title');
+  const note = viewer.querySelector('.v-note');
   const prev = viewer.querySelector('.v-prev');
   const next = viewer.querySelector('.v-next');
   let shots = [], at = 0, opener = null;
@@ -21,7 +22,8 @@ if (viewer) {
   document.querySelectorAll('.shot').forEach(btn => btn.addEventListener('click', () => {
     const award = btn.closest('.award');
     shots = [...award.querySelectorAll('.shot')];
-    title.textContent = award.querySelector('h2').textContent;
+    title.textContent = award.dataset.title;
+    note.textContent = award.dataset.note || '';
     prev.hidden = next.hidden = shots.length < 2;
     opener = btn;
     show(shots.indexOf(btn));
