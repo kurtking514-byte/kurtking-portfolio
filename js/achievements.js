@@ -1,37 +1,41 @@
-// Achievements: each card slowly cycles through its photos (one every 4.5s, cards staggered so they don't all change at once).
-// The small arrows on a card step through its photos by hand. Hovering pauses it.
+// Achievements: every card shows one photo at a time, and all cards change together every 4.5s.
+// The small arrows on a card step through its photos by hand. Hovering a card keeps it still.
 // Clicking a photo opens it big; Prev / Next / arrow keys go through that award's photos.
 const viewer = document.querySelector('.viewer');
 const STEP = 4500;
+const cards = [];
 
-document.querySelectorAll('.award').forEach((award, n) => {
+document.querySelectorAll('.award').forEach(award => {
   const shots = [...award.querySelectorAll('.shot')];
   if (shots.length < 2) return;
   const box = award.querySelector('.shots');
   const dots = document.createElement('div');
   dots.className = 'dots';
   dots.append(...shots.map((s, i) => { const d = document.createElement('i'); if (!i) d.className = 'on'; return d; }));
+  const card = { at: 0, paused: false };
+  card.set = i => {
+    shots[card.at].classList.remove('on'); dots.children[card.at].classList.remove('on');
+    card.at = (i + shots.length) % shots.length;
+    shots[card.at].classList.add('on'); dots.children[card.at].classList.add('on');
+  };
   const arrow = (cls, label, text, by) => {
     const b = document.createElement('button');
     b.type = 'button'; b.className = 'arrow-btn ' + cls; b.textContent = text;
     b.setAttribute('aria-label', label);
-    b.addEventListener('click', () => { set(at + by); restart(); });
+    b.addEventListener('click', () => card.set(card.at + by));
     return b;
   };
   box.append(dots, arrow('prev', 'Previous photo', '‹', -1), arrow('next', 'Next photo', '›', 1));
-
-  let at = 0, paused = false, timer = null;
-  function set(i) {
-    shots[at].classList.remove('on'); dots.children[at].classList.remove('on');
-    at = (i + shots.length) % shots.length;
-    shots[at].classList.add('on'); dots.children[at].classList.add('on');
-  }
-  const tick = () => { if (!paused && !document.hidden && !(viewer && viewer.open)) set(at + 1); };
-  const restart = () => { clearInterval(timer); timer = setInterval(tick, STEP); };
-  box.addEventListener('mouseenter', () => paused = true);
-  box.addEventListener('mouseleave', () => paused = false);
-  setTimeout(() => { tick(); restart(); }, 2500 + n * 550);
+  box.addEventListener('mouseenter', () => card.paused = true);
+  box.addEventListener('mouseleave', () => card.paused = false);
+  cards.push(card);
 });
+
+// one clock for the whole page, so every card changes at the same moment
+setInterval(() => {
+  if (document.hidden || (viewer && viewer.open)) return;
+  cards.forEach(c => { if (!c.paused) c.set(c.at + 1); });
+}, STEP);
 
 if (viewer) {
   const img = viewer.querySelector('.v-single img');
