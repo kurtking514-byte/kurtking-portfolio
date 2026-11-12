@@ -168,12 +168,30 @@ ul { list-style: none; }
 .do-grid h3 { font-family: var(--display); font-weight: 800; font-size: clamp(15px, 2.4cqh, 20px); text-transform: uppercase; line-height: 1.05; }
 .about-text .do-grid p { font-size: clamp(14px, 2cqh, 16px); line-height: 1.4; margin: 4px 0 0; }
 
+/* previous / next page buttons */
+.page-nav { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.about-text .page-nav { margin-top: 2.6cqh; }
+.about-text .page-nav .btn { padding: clamp(9px, 1.6cqh, 13px) 18px; font-size: 13px; }
+/* the back arrow nudges left on hover */
+.btn:hover .arrow.back { transform: translateX(-4px); }
+
 /* small windows (narrow and short): step the text down a little, never below 14px */
 @container (max-width: 1100px) and (max-height: 800px) {
   .about-text p, .facts dd { font-size: 14px; }
   .about-text .lead { font-size: 16px; }
   .about-text .do-grid p { font-size: 14px; }
   .do-grid h3 { font-size: 15px; }
+}
+
+/* very short windows: tighter gaps so the page buttons still fit */
+@container (max-height: 680px) {
+  .about-page .page-title { margin-bottom: 1.2cqh; }
+  .about-text p { margin-bottom: .7cqh; }
+  .about-text .lead { margin-bottom: 1cqh; }
+  .facts { margin-top: 1cqh; }
+  .facts div { padding: .5cqh 0; }
+  .do { margin-top: 1.6cqh; }
+  .about-text .page-nav { margin-top: 1.6cqh; }
 }
 
 /* the text "pulls out" from behind the portrait, one piece after another */
