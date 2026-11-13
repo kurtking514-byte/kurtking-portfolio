@@ -75,9 +75,12 @@ ul { list-style: none; }
 
 /* info block, left, always starting just under the giant name */
 .info {
-  position: absolute; z-index: 4; left: var(--pad); top: 80px; bottom: 4cqh;
   /* stop 24px before the portrait (its left edge is 66cqw minus half its width) */
-  width: min(540px, 42cqw, 66cqw - 32.3cqh - var(--pad) - 24px);
+  --iw: min(600px, 42cqw, 66cqw - 32.3cqh - var(--pad) - 24px);
+  /* on wide screens, slide the block right so it sits near the portrait, not stuck to the edge */
+  position: absolute; z-index: 4; top: 80px; bottom: 4cqh;
+  left: max(var(--pad), 66cqw - 32.3cqh - 72px - var(--iw));
+  width: var(--iw);
   display: flex; flex-direction: column; justify-content: center;
 }
 .hero-name {
