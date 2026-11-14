@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Inter:wght@400;500;600&display=block" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css?v=70576bf2">
-<link rel="stylesheet" href="css/achievements.css?v=4888b85b">
+<link rel="stylesheet" href="css/achievements.css?v=266b851a">
 <script>
   // set the saved theme before the page paints, so it doesn't flash
   try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
@@ -36,12 +36,40 @@
   <main class="ach">
     <h1 class="page-title pull" style="--i:0">Achievements</h1>
 
-    <div class="ach-bar pull" style="--i:1">
-      <p>Research, robotics, academics and sports, from school to national level · Maddela Comprehensive High School, Quirino</p>
-    </div>
+    <div class="road">
+      <header class="stage-head pull" style="--i:1;grid-column:1">
+        <p class="j-level">Elementary<span>2014–2020</span></p>
+        <p class="j-school">Maddela Baptist Christian School</p>
+      </header>
+      <div class="text-card tall pull" style="--i:2;grid-column:1">
+        <p class="t-small">Graduated</p>
+        <p class="t-big">With High Honors</p>
+        <p class="t-small">Class of 2020</p>
+      </div>
 
-    <div class="awards">
-      <article class="award pull" style="--i:2" data-title="STEM Diploma and Academic Excellence Award" data-note="Finished the STEM strand. With High Honors, 96% average in Grade 12 (Q3). High Honors is for the Third Quarter of S.Y. 2025–2026 (awarded Feb 6, 2026).">
+      <header class="stage-head pull" style="--i:1;grid-column:2">
+        <p class="j-level">Junior High<span>2020–2024</span></p>
+        <p class="j-school">Maddela Comprehensive High School</p>
+      </header>
+      <article class="award pull tall jhs-card" style="--i:3;grid-column:2" data-title="Junior High School Completion" data-note="Finished junior high, then moved on to the STEM strand in senior high.">
+        <div class="shots">
+          <button class="shot on" data-full="assets/images/achievements/cert-jhs-2024.webp" data-caption="Junior High School completion certificate, signed May 30, 2024.">
+              <img src="assets/images/achievements/cert-jhs-2024-sm.webp" alt="Junior High School completion certificate of Kurt King D. Magastino" loading="eager" width="720" height="540">
+              <span><b>Certificate</b></span>
+            </button>
+        </div>
+        <div class="place word">JHS<small>2024</small></div>
+        <p class="label">May 2024 · With High Honors</p>
+        <h2>Junior High School Completion</h2>
+        <p class="more">1 photo</p>
+      </article>
+
+      <header class="stage-head pull" style="--i:1;grid-column:3 / 7">
+        <p class="j-level">Senior High, STEM strand<span>2024–2026</span></p>
+        <p class="j-school">Maddela Comprehensive High School</p>
+        <p class="j-honor">Graduated with High Honors · 96% average in Grade 12</p>
+      </header>
+      <article class="award pull" style="--i:4" data-title="STEM Diploma and Academic Excellence Award" data-note="Finished the STEM strand. With High Honors, 96% average in Grade 12 (Q3). High Honors is for the Third Quarter of S.Y. 2025–2026 (awarded Feb 6, 2026).">
         <div class="shots">
           <button class="shot on" data-full="assets/images/achievements/diploma-shs-2026.webp" data-caption="Senior High School Diploma, STEM strand. Signed March 31, 2026.">
               <img src="assets/images/achievements/diploma-shs-2026-sm.webp" alt="Senior High School diploma of Kurt King D. Magastino" loading="eager" width="720" height="540">
@@ -58,7 +86,7 @@
         <p class="more">2 photos</p>
       </article>
 
-      <article class="award pull" style="--i:3" data-title="1st Place, Robotics and Physical Science" data-note="Took first place in both Robotics and Physical Science research, on the same day. The certificates were handed out with the name line blank. The event photos were taken right after, holding them.">
+      <article class="award pull" style="--i:5" data-title="1st Place, Robotics and Physical Science" data-note="Took first place in both Robotics and Physical Science research, on the same day. The certificates were handed out with the name line blank. The event photos were taken right after, holding them.">
         <div class="shots">
           <button class="shot on" data-full="assets/images/achievements/rise-team.webp" data-caption="With my team after the awarding, holding the certificates in front of the projects.">
               <img src="assets/images/achievements/rise-team-sm.webp" alt="Kurt and teammates holding their certificates in front of the research boards" loading="eager" width="720" height="540">
@@ -87,7 +115,7 @@
         <p class="more">5 photos</p>
       </article>
 
-      <article class="award pull" style="--i:4" data-title="5th Place Nationally, Line-Tracing Robot" data-note="Beginner high school division of the 2025 National Robotics Competition in Cavite. The team photo carries the camera date stamp, 11/22/2025. My named certificate from that day is under RC Sumo.">
+      <article class="award pull" style="--i:6" data-title="5th Place Nationally, Line-Tracing Robot" data-note="Beginner high school division of the 2025 National Robotics Competition in Cavite. The team photo carries the camera date stamp, 11/22/2025. My named certificate from that day is under RC Sumo.">
         <div class="shots">
           <button class="shot on" data-full="assets/images/achievements/nrc-team.webp" data-caption="Team and coaches at the competition. Camera date stamp: 11/22/2025.">
               <img src="assets/images/achievements/nrc-team-sm.webp" alt="Team and coaches in front of the National Robotics Competition 2025 banner" loading="eager" width="720" height="540">
@@ -108,7 +136,7 @@
         <p class="more">3 photos</p>
       </article>
 
-      <article class="award pull" style="--i:5" data-title="RC Sumo Robotics, 2 Wins and 1 Loss" data-note="Competed in the 3 kg remote-controlled sumo event at the same national competition. Certificate of Participation, named to Kurt King D. Magastino.">
+      <article class="award pull" style="--i:7" data-title="RC Sumo Robotics, 2 Wins and 1 Loss" data-note="Competed in the 3 kg remote-controlled sumo event at the same national competition. Certificate of Participation, named to Kurt King D. Magastino.">
         <div class="shots">
           <button class="shot on" data-full="assets/images/achievements/sumo-match.webp" data-caption="During the match: 3 kg RC Sumo, Wave 2. 2 wins, 1 loss.">
               <img src="assets/images/achievements/sumo-match-sm.webp" alt="Kurt driving a sumo robot in the ring during a match" loading="eager" width="720" height="540">
@@ -129,7 +157,7 @@
         <p class="more">3 photos</p>
       </article>
 
-      <article class="award pull" style="--i:6" data-title="3rd Place, Individual Robotics" data-note="Presented my own robotics project to the judges, competing on my own. The certificate was misplaced. The school's official post from Nov 4, 2025 names me as 3rd place.">
+      <article class="award pull" style="--i:8" data-title="3rd Place, Individual Robotics" data-note="Presented my own robotics project to the judges, competing on my own. The certificate was misplaced. The school's official post from Nov 4, 2025 names me as 3rd place.">
         <div class="shots">
           <button class="shot on" data-full="assets/images/achievements/dstf-presenting.webp" data-caption="Presenting my robotics project to the judges.">
               <img src="assets/images/achievements/dstf-presenting-sm.webp" alt="Kurt presenting a robotics project to two judges" loading="eager" width="720" height="540">
@@ -150,7 +178,7 @@
         <p class="more">3 photos</p>
       </article>
 
-      <article class="award pull" style="--i:7" data-title="Bronze Medal, Provincial Taekwondo" data-note="Won bronze in Taekwondo at the provincial meet, one level up from the district. The certificate was given with the name line blank. The school's results post names me as a bronze medalist.">
+      <article class="award pull" style="--i:9" data-title="Bronze Medal, Provincial Taekwondo" data-note="Won bronze in Taekwondo at the provincial meet, one level up from the district. The certificate was given with the name line blank. The school's results post names me as a bronze medalist.">
         <div class="shots">
           <button class="shot on" style="background-image: url(assets/images/achievements/tkd-provincial-sm.webp)" data-full="assets/images/achievements/tkd-provincial.webp" data-caption="Maddela Comprehensive High School's results post, Palarong Panlalawigan 2025, Taekwondo Boys: Kurt King Magastino, Bronze.">
               <img class="fit" src="assets/images/achievements/tkd-provincial-sm.webp" alt="School results post: Taekwondo Boys, Kurt King Magastino, Bronze, Palarong Panlalawigan 2025" loading="eager" width="720" height="540">
@@ -167,7 +195,7 @@
         <p class="more">2 photos</p>
       </article>
 
-      <article class="award pull" style="--i:8" data-title="Champion, District Taekwondo Meet" data-note="Won the district meet, then went on to compete at the provincial meet. With the Taekwondo team and coach at the district meet.">
+      <article class="award pull" style="--i:10" data-title="Champion, District Taekwondo Meet" data-note="Won the district meet, then went on to compete at the provincial meet. With the Taekwondo team and coach at the district meet.">
         <div class="shots">
           <button class="shot on" data-full="assets/images/achievements/tkd-district.webp" data-caption="With the Taekwondo team and coach at the district meet.">
               <img src="assets/images/achievements/tkd-district-sm.webp" alt="Taekwondo team and coach at the district meet" loading="eager" width="720" height="540">
@@ -180,21 +208,26 @@
         <p class="more">1 photo</p>
       </article>
 
-      <article class="award pull" style="--i:9" data-title="Junior High School Completion" data-note="Finished junior high, then moved on to the STEM strand in senior high.">
-        <div class="shots">
-          <button class="shot on" data-full="assets/images/achievements/cert-jhs-2024.webp" data-caption="Junior High School completion certificate, signed May 30, 2024.">
-              <img src="assets/images/achievements/cert-jhs-2024-sm.webp" alt="Junior High School completion certificate of Kurt King D. Magastino" loading="eager" width="720" height="540">
-              <span><b>Certificate</b></span>
-            </button>
-        </div>
-        <div class="place word">JHS<small>2024</small></div>
-        <p class="label">May 2024 · Junior High</p>
-        <h2>Junior High School Completion</h2>
-        <p class="more">1 photo</p>
-      </article>
+      <div class="text-card pull" style="--i:11">
+        <p class="t-small">Also in Senior High</p>
+        <p class="t-mid">Silver Medal</p>
+        <p class="t-small">Science</p>
+        <p class="t-mid">Bronze Medal</p>
+        <p class="t-small">Research</p>
+      </div>
+
+      <header class="stage-head now pull" style="--i:1;grid-column:7">
+        <p class="j-level">College<span>2026–Present</span></p>
+        <p class="j-school">University of the Cordilleras</p>
+      </header>
+      <div class="text-card tall now pull" style="--i:12;grid-column:7">
+        <p class="t-small">BS Computer Science</p>
+        <p class="t-big">First Year</p>
+        <p class="t-tag">In progress</p>
+      </div>
     </div>
 
-    <nav class="page-nav pull" style="--i:10" aria-label="Pages">
+    <nav class="page-nav pull" style="--i:13" aria-label="Pages">
       <a class="btn" href="about.html"><span class="arrow back">←</span> Previous: Personal Information</a>
       <a class="btn primary" href="family.html">Next: Family <span class="arrow">→</span></a>
     </nav>
