@@ -76,20 +76,10 @@
 }
 .shot img.fit { position: relative; object-fit: contain; }
 .shots:hover .shot.on img { transform: scale(1.03); }
-/* small arrows (bottom corners) and dots (top right) */
+/* dots (top right) show how many photos an award has */
 .dots { position: absolute; right: 8px; top: 8px; display: flex; gap: 5px; padding: 4px 6px; border-radius: 99px; background: #ece6d8; box-shadow: 0 1px 5px rgb(0 0 0 / .35); pointer-events: none; }
 .dots i { width: 6px; height: 6px; border-radius: 50%; background: #b9bfae; transition: background .3s; }
 .dots i.on { background: #6f7b5f; }
-.arrow-btn {
-  position: absolute; z-index: 3; top: 38%; transform: translateY(-50%); width: 36px; height: 36px; border-radius: 50%;
-  display: grid; place-items: center; padding: 0; cursor: pointer;
-  border: 1.5px solid #1b1c19; background: #ece6d8; color: #1b1c19; box-shadow: 0 1px 5px rgb(0 0 0 / .3);
-  font: 700 20px/1 var(--body); transition: background .2s, color .2s;
-}
-.arrow-btn.prev { left: 8px; }
-.arrow-btn.next { right: 8px; }
-.arrow-btn:hover { background: #1b1c19; color: #ece6d8; }
-.arrow-btn:focus-visible { outline: 3px solid var(--sage); outline-offset: 2px; }
 .shot:focus-visible { outline: 3px solid var(--sage); outline-offset: 3px; }
 
 .place {
@@ -184,4 +174,36 @@
   .road { gap: 18px 12px; }
   .award h2 { font-size: 15px; }
   .page-nav .btn { flex: 1 1 100%; }
+}
+
+/* the staircase: Each school is a step up: Elementary lowest, then Junior High, then Senior High and College. */
+@media (min-width: 861px) {
+  .ach { padding-top: clamp(64px, 9vh, 84px); }
+  .road.stairs {
+    margin-top: 0;
+    grid-template-rows: auto repeat(4, minmax(0, 1fr));
+  }
+  .road.stairs::before { display: none; }
+  .stairs-title { grid-column: 1 / 3; grid-row: 1 / 3; align-self: start; }
+  .stairs-title .page-title { font-size: clamp(34px, min(4.4vw, 7vh), 72px); margin: 0; line-height: .9; }
+  .stairs-title p { margin-top: 10px; font-size: clamp(13px, 1.9vh, 16px); color: var(--muted); max-width: 30ch; }
+
+  /* each step's top edge is a thick line with a dot, so the steps read as stairs */
+  .stairs .stage-head { border-top: 3px solid var(--ink); padding-top: 18px; align-self: end; }
+  .stairs .stage-head::before { top: -8px; width: 13px; height: 13px; }
+  .s-elem { grid-column: 1; grid-row: 4; }
+  .s-jhs  { grid-column: 2; grid-row: 3; }
+  .s-shs  { grid-column: 3 / 7; grid-row: 1; }
+  .s-col  { grid-column: 7; grid-row: 1; }
+  .c-elem { grid-column: 1; grid-row: 5; }
+  .c-jhs  { grid-column: 2; grid-row: 4 / 6; }
+  .c-col  { grid-column: 7; grid-row: 2 / 6; }
+  /* senior high cards: 4 across, each 2 rows tall */
+  .stairs .award:not(.c-jhs), .stairs .text-card:not(.tall) { grid-row: span 2; }
+  .c-elem .t-big { font-size: clamp(18px, min(1.7vw, 3.2vh), 28px); }
+  .c-elem { padding: 8px; gap: 2px; }
+}
+@media (max-width: 860px) {
+  .stairs-title { grid-column: 1 / -1; }
+  .stairs-title p { margin-top: 8px; color: var(--muted); }
 }

@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Inter:wght@400;500;600&display=block" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css?v=70576bf2">
-<link rel="stylesheet" href="css/achievements.css?v=266b851a">
+<link rel="stylesheet" href="css/achievements.css?v=db5a6eb5">
 <script>
   // set the saved theme before the page paints, so it doesn't flash
   try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
@@ -34,24 +34,28 @@
   </header>
 
   <main class="ach">
-    <h1 class="page-title pull" style="--i:0">Achievements</h1>
 
-    <div class="road">
-      <header class="stage-head pull" style="--i:1;grid-column:1">
+    <div class="road stairs">
+      <div class="stairs-title pull" style="--i:0">
+        <h1 class="page-title">Achievements</h1>
+        <p>Every step from elementary to college, and what I won along the way.</p>
+      </div>
+
+      <header class="stage-head s-elem pull" style="--i:1">
         <p class="j-level">Elementary<span>2014–2020</span></p>
         <p class="j-school">Maddela Baptist Christian School</p>
       </header>
-      <div class="text-card tall pull" style="--i:2;grid-column:1">
+      <div class="text-card tall c-elem pull" style="--i:2">
         <p class="t-small">Graduated</p>
         <p class="t-big">With High Honors</p>
         <p class="t-small">Class of 2020</p>
       </div>
 
-      <header class="stage-head pull" style="--i:1;grid-column:2">
+      <header class="stage-head s-jhs pull" style="--i:1">
         <p class="j-level">Junior High<span>2020–2024</span></p>
         <p class="j-school">Maddela Comprehensive High School</p>
       </header>
-      <article class="award pull tall jhs-card" style="--i:3;grid-column:2" data-title="Junior High School Completion" data-note="Finished junior high, then moved on to the STEM strand in senior high.">
+      <article class="award pull tall c-jhs" style="--i:3" data-title="Junior High School Completion" data-note="Finished junior high, then moved on to the STEM strand in senior high.">
         <div class="shots">
           <button class="shot on" data-full="assets/images/achievements/cert-jhs-2024.webp" data-caption="Junior High School completion certificate, signed May 30, 2024.">
               <img src="assets/images/achievements/cert-jhs-2024-sm.webp" alt="Junior High School completion certificate of Kurt King D. Magastino" loading="eager" width="720" height="540">
@@ -64,7 +68,7 @@
         <p class="more">1 photo</p>
       </article>
 
-      <header class="stage-head pull" style="--i:1;grid-column:3 / 7">
+      <header class="stage-head s-shs pull" style="--i:1">
         <p class="j-level">Senior High, STEM strand<span>2024–2026</span></p>
         <p class="j-school">Maddela Comprehensive High School</p>
         <p class="j-honor">Graduated with High Honors · 96% average in Grade 12</p>
@@ -216,11 +220,11 @@
         <p class="t-small">Research</p>
       </div>
 
-      <header class="stage-head now pull" style="--i:1;grid-column:7">
+      <header class="stage-head s-col now pull" style="--i:1">
         <p class="j-level">College<span>2026–Present</span></p>
         <p class="j-school">University of the Cordilleras</p>
       </header>
-      <div class="text-card tall now pull" style="--i:12;grid-column:7">
+      <div class="text-card tall now c-col pull" style="--i:12">
         <p class="t-small">BS Computer Science</p>
         <p class="t-big">First Year</p>
         <p class="t-tag">In progress</p>
@@ -252,6 +256,6 @@
   </dialog>
 
   <script src="js/main.js?v=5d589b95"></script>
-  <script src="js/achievements.js?v=b09be373"></script>
+  <script src="js/achievements.js?v=564c9712"></script>
 </body>
 </html>

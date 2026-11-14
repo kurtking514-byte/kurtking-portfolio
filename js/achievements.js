@@ -1,5 +1,5 @@
 // Achievements: every card shows one photo at a time, and all cards change together every 4.5s.
-// The small arrows on a card step through its photos by hand. Hovering a card keeps it still.
+// Hovering a card keeps it still.
 // Clicking a photo opens it big; Prev / Next / arrow keys go through that award's photos.
 const viewer = document.querySelector('.viewer');
 const STEP = 4500;
@@ -18,14 +18,7 @@ document.querySelectorAll('.award').forEach(award => {
     card.at = (i + shots.length) % shots.length;
     shots[card.at].classList.add('on'); dots.children[card.at].classList.add('on');
   };
-  const arrow = (cls, label, text, by) => {
-    const b = document.createElement('button');
-    b.type = 'button'; b.className = 'arrow-btn ' + cls; b.textContent = text;
-    b.setAttribute('aria-label', label);
-    b.addEventListener('click', () => card.set(card.at + by));
-    return b;
-  };
-  box.append(dots, arrow('prev', 'Previous photo', '‹', -1), arrow('next', 'Next photo', '›', 1));
+  box.append(dots);
   box.addEventListener('mouseenter', () => card.paused = true);
   box.addEventListener('mouseleave', () => card.paused = false);
   cards.push(card);
