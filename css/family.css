@@ -1,0 +1,47 @@
+/* ---------- family & friends: four photos on one screen, no scrolling ---------- */
+.fam {
+  max-width: 1320px; margin: 0 auto; height: 100vh; height: 100svh;
+  display: flex; flex-direction: column;
+  padding: clamp(68px, 10vh, 92px) var(--pad) clamp(10px, 2vh, 20px);
+}
+.fam-top p { margin-top: clamp(6px, 1.2vh, 12px); max-width: 60ch; }
+.fam .page-title { font-size: clamp(34px, min(5vw, 7vh), 76px); margin: 0; line-height: .9; }
+.fam-top p { color: var(--muted); font-size: clamp(13px, 1.9vh, 16px); }
+
+/* three family photos side by side, then a wider gap before the friends photo */
+.fam-grid {
+  flex: 1; min-height: 0; margin-top: clamp(14px, 2.6vh, 26px);
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(0, 1.08fr); grid-template-rows: minmax(0, 1fr);
+  gap: clamp(10px, 1.2vw, 16px);
+}
+.fam-card.friends { margin-left: clamp(10px, 2vw, 32px); }
+
+/* each person: the photo fills the card, the thank-you sits on a dark fade at the bottom */
+.fam-card { position: relative; min-height: 0; overflow: hidden; border-radius: 3px; background: color-mix(in srgb, var(--ink) 8%, transparent); }
+.fam-card img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .4s cubic-bezier(.2, .8, .2, 1); }
+.fam-card.whole::before { content: ""; position: absolute; inset: -24px; background: inherit; background-size: cover; background-position: center; filter: blur(18px) brightness(.8); }
+.fam-card.whole img { position: relative; object-fit: contain; object-position: 50% 30%; }
+.fam-card:hover img { transform: scale(1.03); }
+.fam-card::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 55%; pointer-events: none; background: linear-gradient(to top, rgb(16 17 14 / .95), rgb(16 17 14 / .75) 40%, transparent); }
+.fam-card figcaption {
+  position: absolute; z-index: 1; left: 0; right: 0; bottom: 0; padding: clamp(10px, 2vh, 18px) clamp(10px, 1.2vw, 16px);
+  color: #fff; font-family: var(--display); font-weight: 700; line-height: 1.2;
+  font-size: clamp(14px, min(1.3vw, 2.4vh), 20px); text-shadow: 0 1px 3px rgb(0 0 0 / .5);
+}
+.fam-card figcaption span {
+  display: block; margin-bottom: 4px; font-family: var(--body); font-weight: 600; letter-spacing: .14em;
+  font-size: clamp(10px, 1.5vh, 12px); color: #e3ead6; text-transform: uppercase;
+}
+
+.fam .page-nav { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: clamp(10px, 2.2vh, 22px); }
+.fam .page-nav .btn { padding-block: clamp(9px, 1.6vh, 14px); }
+
+@media (max-width: 860px), (max-aspect-ratio: 1/1) {
+  /* tablets and phones: one photo per row, and the page may scroll */
+  .fam { height: auto; padding-top: 96px; }
+  .fam .page-title { font-size: 44px; }
+  .fam-grid { grid-template-columns: 1fr; grid-template-rows: none; }
+  .fam-grid > * { grid-column: auto !important; }
+  .fam-card { aspect-ratio: 4 / 3; }
+  .fam-card.friends { margin-left: 0; margin-top: 14px; }
+}

@@ -3,25 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Family | Kurt King D. Magastino</title>
-<meta name="description" content="My family, Kurt King D. Magastino. Coming soon.">
+<title>Family &amp; Friends | Kurt King D. Magastino</title>
+<meta name="description" content="Kurt King D. Magastino: the family and friends behind everything.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Inter:wght@400;500;600&display=block" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=70576bf2">
+<link rel="stylesheet" href="css/style.css?v=f81bfa08">
+<link rel="stylesheet" href="css/family.css?v=aab23d54">
 <script>
   // set the saved theme before the page paints, so it doesn't flash
   try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
 </script>
 </head>
-<body class="soon-body">
+<body class="fam-body">
   <header class="site-header">
     <a class="brand" href="index.html">K<span>K</span></a>
     <nav id="nav" class="nav">
       <a href="index.html">Home</a>
       <a href="about.html">Personal Information</a>
       <a href="achievements.html">Achievements</a>
-      <a class="on" href="family.html" aria-current="page">Family</a>
+      <a class="on" href="family.html" aria-current="page">Family &amp; Friends</a>
     </nav>
     <div class="tools">
       <button class="theme-btn" aria-label="Switch to dark mode" title="Switch theme">
@@ -32,15 +33,36 @@
     </div>
   </header>
 
-  <main class="soon">
-    <div class="soon-disc" aria-hidden="true"></div>
-    <p class="label pull" style="--i:0">Coming soon</p>
-    <h1 class="page-title pull" style="--i:1">Family</h1>
-    <p class="soon-note pull" style="--i:2">This page is still being built. Check back soon.</p>
-    <div class="actions pull" style="--i:3">
+  <main class="fam">
+    <div class="fam-top pull" style="--i:0">
+      <h1 class="page-title">Family &amp; Friends</h1>
+      <p>The people behind everything on this site. My family first, then the friends who made school worth it.</p>
+    </div>
+
+    <div class="fam-grid">
+
+      <figure class="fam-card pull" style="--i:2">
+        <img src="assets/images/family/mother-sm.webp" alt="Kurt hugging his mother" width="720" height="536" style="object-position:50% 30%">
+        <figcaption><span>Mother</span>Thank you for my life, and for all the quiet sacrifices that made it what it is.</figcaption>
+      </figure>
+      <figure class="fam-card whole pull" style="--i:3;background-image:url(assets/images/family/father-sm.webp)">
+        <img src="assets/images/family/father-sm.webp" alt="Kurt shaking hands with his father" width="720" height="531">
+        <figcaption><span>Father</span>Thank you for protecting me, even on the days I didn't know I needed it.</figcaption>
+      </figure>
+      <figure class="fam-card pull" style="--i:4">
+        <img src="assets/images/family/siblings-sm.webp" alt="Kurt with his siblings on his 18th birthday" width="540" height="720" style="object-position:50% 45%">
+        <figcaption><span>Siblings</span>Thank you for having my back through every win, every loss and every birthday.</figcaption>
+      </figure>
+      <figure class="fam-card friends pull" style="--i:5">
+        <img src="assets/images/family/friends-sm.webp" alt="Kurt posing with four friends in school uniforms" width="720" height="540" style="object-position:50% 40%">
+        <figcaption><span>Friends</span>The legendary five-man squad. Zero boring days since day one.</figcaption>
+      </figure>
+    </div>
+
+    <nav class="page-nav pull" style="--i:6" aria-label="Pages">
       <a class="btn" href="achievements.html"><span class="arrow back">←</span> Previous: Achievements</a>
       <a class="btn primary" href="index.html">Back to Home <span class="arrow">→</span></a>
-    </div>
+    </nav>
   </main>
 
   <script src="js/main.js?v=5d589b95"></script>
