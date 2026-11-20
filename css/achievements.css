@@ -191,15 +191,16 @@
   /* each step's top edge is a thick line with a dot, so the steps read as stairs */
   .stairs .stage-head { border-top: 3px solid var(--ink); padding-top: 18px; align-self: end; }
   .stairs .stage-head::before { top: -8px; width: 13px; height: 13px; }
-  .s-elem { grid-column: 1; grid-row: 4; }
-  .s-jhs  { grid-column: 2; grid-row: 3; }
+  .s-elem { grid-column: 1; grid-row: 3; }
+  .s-jhs  { grid-column: 2; grid-row: 2; }
   .s-shs  { grid-column: 3 / 7; grid-row: 1; }
   .s-col  { grid-column: 7; grid-row: 1; }
-  .c-elem { grid-column: 1; grid-row: 5; }
-  .c-jhs  { grid-column: 2; grid-row: 4 / 6; }
+  .c-elem { grid-column: 1; grid-row: 4 / 6; }
+  .c-jhs  { grid-column: 2; grid-row: 3 / 6; }
   .c-col  { grid-column: 7; grid-row: 2 / 6; }
+  .stairs-title { grid-row: 1; }
   /* senior high cards: 4 across, each 2 rows tall */
-  .stairs .award:not(.c-jhs), .stairs .text-card:not(.tall) { grid-row: span 2; }
+  .stairs .award:not(.tall), .stairs .text-card:not(.tall) { grid-row: span 2; }
   .c-elem .t-big { font-size: clamp(18px, min(1.7vw, 3.2vh), 28px); }
   .c-elem { padding: 8px; gap: 2px; }
 }

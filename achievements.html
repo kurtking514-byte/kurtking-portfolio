@@ -8,8 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Inter:wght@400;500;600&display=block" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=70576bf2">
-<link rel="stylesheet" href="css/achievements.css?v=db5a6eb5">
+<link rel="stylesheet" href="css/style.css?v=f81bfa08">
+<link rel="stylesheet" href="css/achievements.css?v=87d6be4d">
 <script>
   // set the saved theme before the page paints, so it doesn't flash
   try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
@@ -22,7 +22,7 @@
       <a href="index.html">Home</a>
       <a href="about.html">Personal Information</a>
       <a class="on" href="achievements.html" aria-current="page">Achievements</a>
-      <a href="family.html">Family</a>
+      <a href="family.html">Family &amp; Friends</a>
     </nav>
     <div class="tools">
       <button class="theme-btn" aria-label="Switch to dark mode" title="Switch theme">
@@ -45,11 +45,18 @@
         <p class="j-level">Elementary<span>2014–2020</span></p>
         <p class="j-school">Maddela Baptist Christian School</p>
       </header>
-      <div class="text-card tall c-elem pull" style="--i:2">
-        <p class="t-small">Graduated</p>
-        <p class="t-big">With High Honors</p>
-        <p class="t-small">Class of 2020</p>
-      </div>
+      <article class="award pull tall c-elem" style="--i:2" data-title="Elementary Graduate, With High Honors" data-note="Graduated from Maddela Baptist Christian School with High Honors in 2020.">
+        <div class="shots">
+          <button class="shot on" data-full="assets/images/achievements/grad-elementary.webp" data-caption="Elementary graduation photo, Maddela Baptist Christian School, 2020.">
+              <img src="assets/images/achievements/grad-elementary-sm.webp" alt="Kurt in a red graduation cap and gown at his elementary graduation" loading="eager" width="487" height="600" style="object-position:50% 20%">
+              <span><b>Graduation</b> · 2020</span>
+            </button>
+        </div>
+        <div class="place word">High<small>Honors</small></div>
+        <p class="label">2020 · Graduation</p>
+        <h2>Elementary Graduate, With High Honors</h2>
+        <p class="more">1 photo</p>
+      </article>
 
       <header class="stage-head s-jhs pull" style="--i:1">
         <p class="j-level">Junior High<span>2020–2024</span></p>
@@ -224,16 +231,23 @@
         <p class="j-level">College<span>2026–Present</span></p>
         <p class="j-school">University of the Cordilleras</p>
       </header>
-      <div class="text-card tall now c-col pull" style="--i:12">
-        <p class="t-small">BS Computer Science</p>
-        <p class="t-big">First Year</p>
-        <p class="t-tag">In progress</p>
-      </div>
+      <article class="award pull tall c-col now" style="--i:12" data-title="BS Computer Science, University of the Cordilleras" data-note="First year, BS Computer Science at the University of the Cordilleras, Baguio City. Still in progress.">
+        <div class="shots">
+          <button class="shot on" data-full="assets/images/achievements/college-uc.webp" data-caption="At the University of the Cordilleras, in front of the university seal.">
+              <img src="assets/images/achievements/college-uc-sm.webp" alt="Kurt in a white shirt and black tie in front of the University of the Cordilleras seal" loading="eager" width="429" height="600" style="object-position:50% 25%">
+              <span><b>University of the Cordilleras</b> · 2026</span>
+            </button>
+        </div>
+        <div class="place word">Now<small>1st year</small></div>
+        <p class="label">2026–Present · In progress</p>
+        <h2>BS Computer Science, First Year</h2>
+        <p class="more">1 photo</p>
+      </article>
     </div>
 
     <nav class="page-nav pull" style="--i:13" aria-label="Pages">
       <a class="btn" href="about.html"><span class="arrow back">←</span> Previous: Personal Information</a>
-      <a class="btn primary" href="family.html">Next: Family <span class="arrow">→</span></a>
+      <a class="btn primary" href="family.html">Next: Family &amp; Friends <span class="arrow">→</span></a>
     </nav>
   </main>
 
