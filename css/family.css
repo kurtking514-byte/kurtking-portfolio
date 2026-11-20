@@ -33,6 +33,10 @@
   transition: transform .3s cubic-bezier(.2, .8, .2, 1);
 }
 .fam-card:hover img { transform: rotate(-1.2deg) scale(1.02); }
+/* the friends card holds two photos side by side */
+.pics { grid-row: 2; min-height: 0; height: 100%; display: flex; gap: clamp(6px, .8vw, 10px); }
+.pics img { max-width: min(17vw, 190px); }
+.pics img:hover { transform: rotate(1.2deg) scale(1.02); }
 .fam-card figcaption {
   grid-row: 2; align-self: center;
   font-family: 'Fraunces', Georgia, serif; font-style: italic; font-weight: 400;
@@ -50,6 +54,8 @@
   .fam-card { grid-template-columns: 1fr; }
   .fam-card img, .fam-card figcaption { grid-row: auto; }
   .fam-card img { width: 100%; height: auto; max-width: none; }
+  .pics { height: auto; }
+  .pics img { width: calc(50% - 4px); }
 }
 
 /* ---------- photo window: medium size, centered, page dimmed behind ---------- */

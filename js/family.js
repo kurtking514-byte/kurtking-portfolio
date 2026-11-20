@@ -10,8 +10,8 @@ if (view) {
     const card = img.closest('.fam-card');
     big.src = img.dataset.full;
     big.alt = img.alt;
-    who.textContent = card.querySelector('.who').textContent;
-    note.textContent = card.querySelector('figcaption').textContent;
+    who.textContent = img.dataset.who || card.querySelector('.who').textContent;
+    note.textContent = img.dataset.note || card.querySelector('figcaption').textContent;
     opener = img;
     view.showModal();
   };
