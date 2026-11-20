@@ -29,8 +29,10 @@
   font-size: clamp(14px, min(1.3vw, 2.4vh), 20px); text-shadow: 0 1px 3px rgb(0 0 0 / .5);
 }
 .fam-card figcaption span {
-  display: block; margin-bottom: 4px; font-family: var(--body); font-weight: 600; letter-spacing: .14em;
-  font-size: clamp(10px, 1.5vh, 12px); color: #e3ead6; text-transform: uppercase;
+  display: table; margin-bottom: 8px; padding: 5px 12px; border-radius: 99px;
+  background: #ece6d8; color: #1b1c19; text-shadow: none;
+  font-family: var(--display); font-weight: 900; letter-spacing: .12em; text-transform: uppercase;
+  font-size: clamp(12px, 1.8vh, 15px);
 }
 
 .fam .page-nav { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: clamp(10px, 2.2vh, 22px); }
