@@ -8,31 +8,35 @@
 .fam .page-title { font-size: clamp(34px, min(5vw, 7vh), 76px); margin: 0; line-height: .9; }
 .fam-top p { color: var(--muted); font-size: clamp(13px, 1.9vh, 16px); }
 
-/* three family photos side by side, then a wider gap before the friends photo */
+/* two by two: each person gets a paper card with their name on top,
+   the photo shown whole on the left and a note to them on the right */
 .fam-grid {
-  flex: 1; min-height: 0; margin-top: clamp(14px, 2.6vh, 26px);
-  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(0, 1.08fr); grid-template-rows: minmax(0, 1fr);
-  gap: clamp(10px, 1.2vw, 16px);
+  flex: 1; min-height: 0; margin-top: clamp(14px, 2.4vh, 24px);
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: clamp(12px, 2vh, 22px) clamp(12px, 1.6vw, 24px);
 }
-.fam-card.friends { margin-left: clamp(10px, 2vw, 32px); }
-
-/* each person: the photo fills the card, the thank-you sits on a dark fade at the bottom */
-.fam-card { position: relative; min-height: 0; overflow: hidden; border-radius: 3px; background: color-mix(in srgb, var(--ink) 8%, transparent); }
-.fam-card img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .4s cubic-bezier(.2, .8, .2, 1); }
-.fam-card.whole::before { content: ""; position: absolute; inset: -24px; background: inherit; background-size: cover; background-position: center; filter: blur(18px) brightness(.8); }
-.fam-card.whole img { position: relative; object-fit: contain; object-position: 50% 30%; }
-.fam-card:hover img { transform: scale(1.03); }
-.fam-card::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 55%; pointer-events: none; background: linear-gradient(to top, rgb(16 17 14 / .95), rgb(16 17 14 / .75) 40%, transparent); }
+.fam-card {
+  min-height: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr);
+  gap: clamp(8px, 1.4vh, 12px) clamp(14px, 1.6vw, 24px);
+  padding: clamp(12px, 2vh, 20px); border-radius: 6px;
+  background: color-mix(in srgb, var(--accent) 22%, var(--bg));
+}
+.who {
+  grid-column: 1 / -1;
+  font-family: var(--display); font-weight: 900; font-stretch: 75%; text-transform: uppercase; letter-spacing: .02em;
+  font-size: clamp(20px, min(2vw, 3.6vh), 32px); line-height: 1; color: var(--ink);
+}
+.fam-card img {
+  grid-row: 2; height: 100%; width: auto; max-width: min(34vw, 380px); min-height: 0;
+  object-fit: contain; object-position: left center; border-radius: 4px;
+  box-shadow: 0 6px 18px rgb(0 0 0 / .18);
+  transition: transform .3s cubic-bezier(.2, .8, .2, 1);
+}
+.fam-card:hover img { transform: rotate(-1.2deg) scale(1.02); }
 .fam-card figcaption {
-  position: absolute; z-index: 1; left: 0; right: 0; bottom: 0; padding: clamp(10px, 2vh, 18px) clamp(10px, 1.2vw, 16px);
-  color: #fff; font-family: var(--display); font-weight: 700; line-height: 1.2;
-  font-size: clamp(14px, min(1.3vw, 2.4vh), 20px); text-shadow: 0 1px 3px rgb(0 0 0 / .5);
-}
-.fam-card figcaption span {
-  display: table; margin-bottom: 8px; padding: 5px 12px; border-radius: 99px;
-  background: #ece6d8; color: #1b1c19; text-shadow: none;
-  font-family: var(--display); font-weight: 900; letter-spacing: .12em; text-transform: uppercase;
-  font-size: clamp(12px, 1.8vh, 15px);
+  grid-row: 2; align-self: center;
+  font-family: 'Fraunces', Georgia, serif; font-style: italic; font-weight: 400;
+  font-size: clamp(16px, min(1.55vw, 2.9vh), 24px); line-height: 1.35; color: var(--ink);
 }
 
 .fam .page-nav { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: clamp(10px, 2.2vh, 22px); }
@@ -43,7 +47,7 @@
   .fam { height: auto; padding-top: 96px; }
   .fam .page-title { font-size: 44px; }
   .fam-grid { grid-template-columns: 1fr; grid-template-rows: none; }
-  .fam-grid > * { grid-column: auto !important; }
-  .fam-card { aspect-ratio: 4 / 3; }
-  .fam-card.friends { margin-left: 0; margin-top: 14px; }
+  .fam-card { grid-template-columns: 1fr; }
+  .fam-card img, .fam-card figcaption { grid-row: auto; }
+  .fam-card img { width: 100%; height: auto; max-width: none; }
 }
