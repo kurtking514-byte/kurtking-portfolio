@@ -28,6 +28,7 @@
   background: var(--ink); box-shadow: 0 0 0 4px var(--bg);
 }
 .stage-head.now::before { background: var(--sage); }
+.j-logo { float: left; height: clamp(30px, 5vh, 46px); width: auto; margin: 0 8px 2px 0; }
 .j-honor { font-size: clamp(12px, 1.7vh, 14px); color: var(--muted); margin-top: 2px; }
 .j-level { font-size: clamp(11px, 1.6vh, 13px); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--sage); }
 .j-level span { display: block; color: var(--muted); letter-spacing: .04em; }
