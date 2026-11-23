@@ -213,3 +213,6 @@
 @media (min-width: 861px) and (max-height: 640px) {
   .stairs-title p { margin-top: 6px; line-height: 1.35; }
 }
+/* the step lines' dots poke above the header; let the slide-in animation show them whole */
+.stage-head.pull { animation-name: pull-head; }
+@keyframes pull-head { from { opacity: 0; transform: translateX(-48px); clip-path: inset(-14px 100% 0 -14px); } to { clip-path: inset(-14px -14px 0 -14px); } }
