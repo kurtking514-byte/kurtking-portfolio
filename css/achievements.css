@@ -94,6 +94,8 @@
 }
 .place small { display: block; white-space: nowrap; font-size: 7px; font-weight: 700; font-stretch: 100%; letter-spacing: .06em; margin-top: 2px; }
 .place.two { font-size: clamp(12px, 2vh, 15px); }
+.place.logo { background: #fff; padding: 3px; }
+.place.logo img { width: 100%; height: 100%; object-fit: contain; border-radius: 50%; }
 .place.word { font-size: clamp(9px, 1.5vh, 11px); letter-spacing: .02em; }
 
 .award .label { font-size: clamp(10px, 1.5vh, 12px); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; line-height: 1.3; }
