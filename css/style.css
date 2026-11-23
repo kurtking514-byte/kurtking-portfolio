@@ -76,10 +76,10 @@ ul { list-style: none; }
 /* info block, left, always starting just under the giant name */
 .info {
   /* stop 24px before the portrait (its left edge is 66cqw minus half its width) */
-  --iw: min(600px, 42cqw, 66cqw - 32.3cqh - var(--pad) - 24px);
+  --iw: min(600px, 42cqw, 66cqw - 14cqh - var(--pad) - 24px);
   /* on wide screens, slide the block right so it sits near the portrait, not stuck to the edge */
   position: absolute; z-index: 4; top: 80px; bottom: 4cqh;
-  left: max(var(--pad), 66cqw - 32.3cqh - 72px - var(--iw));
+  left: max(var(--pad), 66cqw - 14cqh - 72px - var(--iw));
   width: var(--iw);
   display: flex; flex-direction: column; justify-content: center;
 }
@@ -136,22 +136,22 @@ ul { list-style: none; }
   position: relative; height: 100vh; height: 100svh; overflow: hidden;
   container-type: size;
   /* portrait height; on narrow screens it shrinks so the text keeps at least 600px */
-  --ph: min(88cqh, 54cqw, (100cqw - 600px - 2 * var(--pad) - 4.5cqw) / .703);
-  --pw: calc(var(--ph) * .703);            /* portrait width (image is 1054x1500) */
+  --ph: min(88cqh, 54cqw, (100cqw - 600px - 2 * var(--pad) - 4.5cqw) / .577);
+  --pw: calc(var(--ph) * .3035);           /* portrait width (image is 502x1654) */
 }
 .about-portrait {
-  position: absolute; z-index: 2; left: var(--pad); bottom: 0; height: var(--ph);
+  position: absolute; z-index: 2; left: calc(var(--pad) + var(--pw) * .45); bottom: 0; height: var(--ph);
   animation: stand-m .6s cubic-bezier(.2, .8, .2, 1) both;
 }
 .arch {
-  position: absolute; z-index: 1; left: var(--pad); bottom: 0; width: var(--pw); height: calc(var(--ph) * .78);
+  position: absolute; z-index: 1; left: var(--pad); bottom: 0; width: calc(var(--pw) * 1.9); height: calc(var(--ph) * .78);
   background: var(--accent); border-radius: 999px 999px 0 0;
   animation: rise .5s cubic-bezier(.2, .8, .2, 1) both .1s;
 }
 @keyframes rise { from { transform: translateY(100%); } }
 
 .about-text {
-  position: absolute; left: calc(var(--pad) + var(--pw) + 4.5cqw); right: var(--pad); top: 80px; bottom: 2.5cqh;
+  position: absolute; left: calc(var(--pad) + var(--pw) * 1.9 + 4.5cqw); right: var(--pad); top: 80px; bottom: 2.5cqh;
   max-width: 760px; display: flex; flex-direction: column; justify-content: center;
 }
 .about-page .page-title { font-size: clamp(30px, min(max(6cqw, 40px), 7cqh), 104px); margin-bottom: 2cqh; }
@@ -205,7 +205,7 @@ ul { list-style: none; }
 @media (max-width: 860px), (max-aspect-ratio: 1/1) {
   .about-page { height: auto; min-height: 0; overflow: visible; container-type: normal; padding: 96px var(--pad) 40px; --ph: min(58svh, 560px); }
   .arch, .about-portrait { left: 50%; margin-left: calc(var(--pw) / -2); top: 96px; bottom: auto; }
-  .arch { top: calc(96px + var(--ph) * .22); }
+  .arch { top: calc(96px + var(--ph) * .22); width: calc(var(--pw) * 1.9); margin-left: calc(var(--pw) * -.95); }
   .about-text { position: relative; inset: auto; max-width: none; margin-top: calc(var(--ph) + 28px); display: block; }
   .about-page .page-title { font-size: clamp(48px, 15vw, 110px); }
   .about-text p, .facts dd { font-size: 16px; }

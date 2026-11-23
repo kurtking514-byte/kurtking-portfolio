@@ -44,7 +44,7 @@ if (themeBtn) {
 // draws it. Then the other page's content is swapped in without loading a new
 // page, so even a slow browser shows no pause between the two.
 let portrait = document.querySelector('.portrait, .about-portrait');
-const RATIO = 1054 / 1500;   // portrait.webp width / height
+const RATIO = 502 / 1654;   // portrait.webp width / height
 
 // Where each page draws the portrait (viewport coords). Keep in sync with style.css.
 function portraitSpot(page) {
@@ -54,7 +54,7 @@ function portraitSpot(page) {
   let h, x, y;
   if (page === 'about') {
     if (stacked) { h = Math.min(H * .58, 560); x = (W - h * RATIO) / 2; y = 96; }
-    else { h = Math.min(H * .88, W * .54, (W - 600 - 2 * pad - W * .045) / RATIO); x = pad; y = H - h; }
+    else { h = Math.min(H * .88, W * .54, (W - 600 - 2 * pad - W * .045) / (RATIO * 1.9)); x = pad + h * RATIO * .45; y = H - h; }
   } else {
     if (stacked) { h = Math.min(H * .6, 640); x = (W - h * RATIO) / 2; y = 96; }
     else { h = H * .92; x = W * .66 - h * RATIO / 2; y = H - h; }
