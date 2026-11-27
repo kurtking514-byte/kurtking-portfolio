@@ -186,8 +186,8 @@ ul { list-style: none; }
   .do-grid h3 { font-size: 15px; }
 }
 
-/* very short windows: tighter gaps so the page buttons still fit */
-@container (max-height: 680px) {
+/* shorter windows: tighter gaps so the page buttons still fit */
+@container (max-height: 800px) {
   .about-page .page-title { margin-bottom: 1.2cqh; }
   .about-text p { margin-bottom: .7cqh; }
   .about-text .lead { margin-bottom: 1cqh; }
@@ -196,6 +196,14 @@ ul { list-style: none; }
   .facts dd { line-height: 1.25; }
   .do { margin-top: 1.6cqh; }
   .about-text .page-nav { margin-top: 1.6cqh; }
+}
+/* very short windows: a little tighter still */
+@container (max-height: 680px) {
+  .facts div { padding: 0; }
+  .facts dd { line-height: 1.2; }
+  .about-text p { font-size: 14px; line-height: 1.4; }
+  .about-text .lead { font-size: 16px; }
+  .do, .about-text .page-nav { margin-top: 1.2cqh; }
 }
 
 /* the text "pulls out" from behind the portrait, one piece after another */
